@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://example.com/2020/10/21/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/</loc>
+    
+    <lastmod>2020-10-21</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://example.com/2020/10/20/hello-world/</loc>
+    
+    <lastmod>2020-10-20</lastmod>
+    
+  </url>
+  
+
+  <url>
+    <loc>http://example.com/</loc>
+    <lastmod>2020-10-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+
+  
+</urlset>

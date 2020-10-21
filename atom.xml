@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小明的博客</title>
+  
+  <subtitle>技术博客</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2020-10-21T01:34:28.244Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>小明同鞋</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://example.com/2020/10/21/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/"/>
+    <id>http://example.com/2020/10/21/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/</id>
+    <published>2020-10-21T01:34:28.244Z</published>
+    <updated>2020-10-21T01:34:28.244Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="oracle-误删数据、表的恢复"><a href="#oracle-误删数据、表的恢复" class="headerlink" title="oracle 误删数据、表的恢复"></a>oracle 误删数据、表的恢复</h1><p><font size="4" color="#dd0000">注意：鉴于oracle的特殊性，表名基本为大写（注意大小写问题）。</font></p><h2 id="一、delete-误删数据问题"><a href="#一、delete-误删数据问题" class="headerlink" title="一、delete 误删数据问题"></a>一、delete 误删数据问题</h2><h3 id="1、根据v-sqlarea进行恢复，把表恢复到删除时间点"><a href="#1、根据v-sqlarea进行恢复，把表恢复到删除时间点" class="headerlink" title="1、根据v$sqlarea进行恢复，把表恢复到删除时间点"></a>1、根据v$sqlarea进行恢复，把表恢复到删除时间点</h3><ol><li>查询sql执行时间<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select SQL_TEXT,LAST_ACTIVE_TIME from v$sqlarea </span><br><span class="line">where LAST_ACTIVE_TIME &gt; to_date(&#39;2020-07-09 9:30:27&#39;,&#39;yyyy-mm-dd hh24:mi:ss&#39;)</span><br><span class="line">and SQL_TEXT like &#39;%表名%&#39;;</span><br></pre></td></tr></table></figure><ol start="2"><li>根据时间进行恢复<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名</span><br><span class="line">select * from 表名 AS OF TIMESTAMP to_timestamp(&#39;2020-07-09 9:32:27&#39;,&#39;yyyy-mm-dd hh24:mi:ss&#39;);</span><br></pre></td></tr></table></figure><h3 id="2、根据闪回把表恢复到某个时间点"><a href="#2、根据闪回把表恢复到某个时间点" class="headerlink" title="2、根据闪回把表恢复到某个时间点"></a>2、根据闪回把表恢复到某个时间点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 直接闪回某张表到某个时间点</span><br><span class="line">flashback table 表名 to timestamp to_date(&#39;2020-07-09 09:49:20&#39;,&#39;yyyy-mm-dd hh24:mi:ss&#39;);</span><br><span class="line">-- 出现异常则先授权，开启行移动功能 </span><br><span class="line">alter table 表名 enable row movement;</span><br></pre></td></tr></table></figure><h3 id="3、通过scn进行恢复（根据scn可把整个库恢复到某个时间点）"><a href="#3、通过scn进行恢复（根据scn可把整个库恢复到某个时间点）" class="headerlink" title="3、通过scn进行恢复（根据scn可把整个库恢复到某个时间点）"></a>3、通过scn进行恢复（根据scn可把整个库恢复到某个时间点）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-- 查询某个时间点的scn</span><br><span class="line">select timestamp_to_scn(to_timestamp(&#39;2020-07-09 09:49:20&#39;,&#39;yyyy-mm-dd hh24:mi:ss&#39;)) from dual;</span><br><span class="line"></span><br><span class="line">-- 通过闪回把某张表恢复到某个时间点的scn</span><br><span class="line">flashback table 表名 to scn 161664467;</span><br></pre></td></tr></table></figure><h2 id="二、drop-误删表的恢复方法"><a href="#二、drop-误删表的恢复方法" class="headerlink" title="二、drop 误删表的恢复方法"></a>二、drop 误删表的恢复方法</h2><h3 id="1、通过回收站恢复"><a href="#1、通过回收站恢复" class="headerlink" title="1、通过回收站恢复"></a>1、通过回收站恢复</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- 查询被删除的表</span><br><span class="line">select * from recyclebin where original_name like &#39;%表名%&#39;  order by droptime desc;</span><br><span class="line">-- 恢复被删除的表(如果该表重新被创建，需要恢复到新的表)（如果该表存在多次删除历史，只会恢复最后版本）</span><br><span class="line">flashback table &#39;需要恢复的表名&#39; to before drop [rename to 新表名]；</span><br><span class="line"></span><br><span class="line">-- 通过唯一标识(如果该表重新被创建，需要恢复到新的表)（根据recyclebin 的object_name 作为唯一标识恢复指定时间版本）</span><br><span class="line">flashback table &quot;BIN$BuhrIJqTR7qMITOgqKK8qg&#x3D;&#x3D;$0&quot; to before drop rename to 新表名;</span><br></pre></td></tr></table></figure></li></ol></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;oracle-误删数据、表的恢复&quot;&gt;&lt;a href=&quot;#oracle-误删数据、表的恢复&quot; class=&quot;headerlink&quot; title=&quot;oracle 误删数据、表的恢复&quot;&gt;&lt;/a&gt;oracle 误删数据、表的恢复&lt;/h1&gt;&lt;p&gt;&lt;font size=&quot;4&quot;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/2020/10/20/hello-world/"/>
+    <id>http://example.com/2020/10/20/hello-world/</id>
+    <published>2020-10-20T07:32:49.912Z</published>
+    <updated>2020-10-20T07:32:49.912Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
