@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	
+	<!-- title -->
+	
+	<title>
+	
+		Comparable与Comparator | 
+	 
+	小明的博客
+	</title>
+	
+	<!-- keywords,description -->
+	
+		<meta name="keywords" content="java、mysql" />
+	 
+		<meta name="description" content="详细讲解comparable及comparator的使用及用法。" />
+	
+
+	<!-- favicon -->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+	
+  
+
+	
+<link rel="stylesheet" href="/css/main.css">
+
+	
+<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/darcula.min.css">
+
+
+	
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+	
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
+
+	
+<script src="/js/main.js"></script>
+
+	
+		
+<script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+
+		
+<script src="https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js"></script>
+
+	
+	
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="小明的博客" type="application/atom+xml">
+</head>
+
+<body>
+	<header id="header">
+    <a id="title" href="/" class="logo">小明的博客</a>
+
+	<ul id="menu">
+		<li class="menu-item">
+			<a href="/about" class="menu-item-link">关于我</a>
+		</li>
+		
+<!--		<li class="menu-item">-->
+<!--			<a href="https://github.com/wujun234/uid-generator-spring-boot-starter" class="menu-item-link" target="_blank">-->
+<!--				UidGenerator-->
+<!--			</a>-->
+<!--		</li>-->
+		<li class="menu-item">
+			<a href="https://github.com/wujun234" class="menu-item-link" target="_blank">
+				<i class="fa fa-github fa-2x"></i>
+			</a>
+		</li>
+	</ul>
+</header>
+
+	
+<div id="sidebar">
+	<button id="sidebar-toggle" class="toggle" ><i class="fa fa-arrow-right " aria-hidden="true"></i></button>
+	
+	<div id="site-toc">
+		<input id="search-input" class="search-input" type="text" placeholder="search...">
+		<div id="tree">
+			
+
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										java学习
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										工具包学习
+									</a>
+									
+							<ul>
+								<li class="file active">
+									<a href="/2020/10/27/java%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E5%85%B7%E5%8C%85%E5%AD%A6%E4%B9%A0/Comparable%E4%B8%8EComparator/">
+										Comparable与Comparator
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										并发
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/">
+										悲观锁与乐观锁
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										数据库操作
+									</a>
+									
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										oracle
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/">
+										oracle 误删数据、表的恢复
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+		</div>
+	</div>
+</div>
+
+	<!-- 引入正文 -->
+	<div id="content">
+		<h1 id="article-title">
+
+	Comparable与Comparator
+</h1>
+<div class="article-meta">
+	
+	<span>小明同鞋</span>
+	<span>2020-10-27 14:16:33</span>
+    
+		<div id="article-categories">
+            
+                
+                    <span>
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <a href="/categories/JAVA/">JAVA</a>
+						
+                    </span>
+                
+            
+		</div>
+    
+</div>
+
+<div id="article-content">
+	<h2 id="Comparable"><a href="#Comparable" class="headerlink" title="Comparable"></a>Comparable</h2><p>[TOC]</p>
+<pre><code>import java.util.Objects;
+
+/**
+ * 实现Comparator接口的类可以方便的排序， 覆写compareTo接口
+ * @author zxl
+ * @date 2020/10/27 18:00
+ */
+public class Student implements Comparable&lt;Student&gt;&#123;
+
+    /*** 名字 */
+    private String name;
+
+    /*** 年龄 */
+    private int age;
+
+    /*** 分数 */
+    private float score;
+
+    /**
+     * 排序规则：以分数降序排序，若分数一致，则根据年龄升序排序
+     * @param o 比较参数
+     * @return 比较结果 -1大于   0等于   1小于
+     */
+    @Override
+    public int compareTo(Student o) &#123;
+        /*
+         * this.age - o.age 升序
+         * o.score - this.score 降序
+         */
+        return Objects.equals(o.score,this.score) ? this.age - o.age : (int) (o.score - this.score);
+    &#125;
+
+    public Student(String name, int age, float score) &#123;
+        this.name = name;
+        this.age = age;
+        this.score = score;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;Student&#123;&quot; +
+                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, age=&quot; + age +
+                &quot;, score=&quot; + score +
+                &#39;&#125;&#39;;
+    &#125;
+&#125;
+
+
+public class Comparable01 &#123;
+
+    public static void main(String args[])&#123;
+        Student stu[] = &#123;
+                new Student(&quot;张三&quot;,20,90.0f),
+                new Student(&quot;李四&quot;,22,90.0f),
+                new Student(&quot;王五&quot;,20,99.0f),
+                new Student(&quot;赵六&quot;,20,70.0f),
+                new Student(&quot;孙七&quot;,22,100.0f)&#125; ;
+        java.util.Arrays.sort(stu) ;    // 进行排序操作
+        for(int i=0;i&lt;stu.length;i++)&#123;    // 循环输出数组中的内容
+            System.out.println(stu[i]) ;
+        &#125;
+    &#125;
+
+&#125;
+</code></pre>
+<h2 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator</h2><pre><code>public class Student &#123;
+    /*** 名字 */
+    private String name;
+
+    /*** 年龄 */
+    private int age;
+
+    /*** 分数 */
+    private float score;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public int getAge() &#123;
+        return age;
+    &#125;
+
+    public void setAge(int age) &#123;
+        this.age = age;
+    &#125;
+
+    public float getScore() &#123;
+        return score;
+    &#125;
+
+    public void setScore(float score) &#123;
+        this.score = score;
+    &#125;
+
+    public Student(String name, int age, float score) &#123;
+        this.name = name;
+        this.age = age;
+        this.score = score;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;Student&#123;&quot; +
+                &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, age=&quot; + age +
+                &quot;, score=&quot; + score +
+                &#39;&#125;&#39;;
+    &#125;
+
+&#125;
+
+public class ComparatorTest &#123;
+
+    public static void main(String[] args) &#123;
+        Student stu[] = &#123;
+                new Student(&quot;张三&quot;,20,90.0f),
+                new Student(&quot;李四&quot;,22,90.0f),
+                new Student(&quot;王五&quot;,20,99.0f),
+                new Student(&quot;赵六&quot;,20,70.0f),
+                new Student(&quot;孙七&quot;,22,100.0f)&#125; ;
+
+        // 排序方法一
+        java.util.Arrays.sort(stu, new Comparator&lt;Student&gt;() &#123;
+            @Override
+            public int compare(Student o1, Student o2) &#123;
+                /*
+                 * o1.param - o2.param 升序
+                 * o2.param - o1.param 降序
+                 */
+                return Objects.equals(o1.getScore(),o2.getScore()) ? o1.getAge() - o2.getAge() : (int) (o2.getScore() - o1.getScore());
+            &#125;
+        &#125;) ;
+
+        // 排序方法二 lambda方法
+        java.util.Arrays.sort(stu, (o1, o2) -&gt; Objects.equals(o1.getScore(),o2.getScore()) ? o1.getAge() - o2.getAge() : (int) (o2.getScore() - o1.getScore())) ;
+
+
+        for(int i=0;i&lt;stu.length;i++)&#123;    // 循环输出数组中的内容
+            System.out.println(stu[i]) ;
+        &#125;
+    &#125;
+
+    /**
+     * 排序方法三：该方法需新建一个java类使用，
+     * java.util.Arrays.sort(stu, new MyComparator());
+     */
+    class MyComparator implements Comparator&lt;Student&gt;&#123;
+        @Override
+        public int compare(Student o1, Student o2) &#123;
+            return Objects.equals(o1.getScore(),o2.getScore()) ? o1.getAge() - o2.getAge() : (int) (o2.getScore() - o1.getScore());
+        &#125;
+    &#125;
+
+&#125;</code></pre>
+<h2 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h2><table>
+    <tr>
+        <th>属性</th>
+        <th>Comparable</th>
+        <th>Comparator</th>
+    </tr>
+    <tr>
+        <td>适用场景</td>
+        <td>集合内部定义实现</td>
+        <td>集合外部实现排序</td>
+    </tr>
+    <tr>
+        <td>区别</td>
+        <td>1. java.lang 包<br>
+            2. 方法：int compareTo(Object o)
+        </td>
+        <td>1. java.util 包<br>
+            2. 方法：int compare(T o1, To2)
+        </td>
+    </tr>
+    <tr>
+        <td>原理</td>
+        <td colspan="2">基于红黑二叉树原理实现的</td>
+    </tr>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>返回值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-1</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>0</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>1</td>
+<td>小于</td>
+</tr>
+</tbody></table>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>- <a target="_blank" rel="noopener" href="https://blog.csdn.net/wilson27/article/details/90339765">java中compareable和comparator的区别，比较器实现的原理！</a></p>
+
+</div>
+
+
+    <div class="post-guide">
+        <div class="item left">
+            
+        </div>
+        <div class="item right">
+            
+              <a href="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/">
+                
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+            
+        </div>
+    </div>
+
+
+
+	<div id="vcomments"></div>
+
+
+<script>
+	
+		// 评论
+		new Valine({
+			av: AV,
+			el: '#vcomments',
+			notify: false,
+			verify: false,
+			path: window.location.pathname,
+			appId: '',
+			appKey: '',
+			placeholder: '请输入评论',
+			avatar: 'retro',
+			recordIP: false
+		})
+	
+	
+</script>
+	</div>
+	<div id="footer">
+	<p>
+	©2020-<span id="footerYear"></span> 
+	<a href="/">小明同鞋</a> 
+	
+	
+		|
+		<span id="busuanzi_container_site_pv">
+			pv
+			<span id="busuanzi_value_site_pv"></span>
+		</span>
+		|
+		<span id="busuanzi_container_site_uv"> 
+			uv
+			<span id="busuanzi_value_site_uv"></span>
+		</span>
+	
+	<br>
+	Theme <a href="//github.com/wujun234/hexo-theme-tree" target="_blank">Tree</a>
+	by <a href="//github.com/monk6658" target="_blank">monk6658</a>
+	Powered by <a href="//hexo.io" target="_blank">Hexo</a>
+	</p>
+</div>
+<script type="text/javascript"> 
+	document.getElementById('footerYear').innerHTML = new Date().getFullYear() + '';
+</script>
+	<button id="totop-toggle" class="toggle"><i class="fa fa-angle-double-up" aria-hidden="true"></i></button>
+</body>
+</html>

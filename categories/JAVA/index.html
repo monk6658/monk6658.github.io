@@ -8,8 +8,6 @@
 	<!-- title -->
 	
 	<title>
-	
-		悲观锁与乐观锁 | 
 	 
 	小明的博客
 	</title>
@@ -18,7 +16,7 @@
 	
 		<meta name="keywords" content="java、mysql" />
 	 
-		<meta name="description" content="乐观锁对应于生活中乐观的人总是想着事情往好的方向发展，悲观锁对应于生活中悲观的人总是想着事情往坏的方向发展。这两种人各有优缺点，不能不以场景而定说一种人好于另外一种人。" />
+		<meta name="description" content="永远年轻，永远热泪盈眶" />
 	
 
 	<!-- favicon -->
@@ -103,8 +101,39 @@
 									</a>
 									
 							<ul>
-								<li class="file active">
-									<a href="/2020/10/21/java%E5%AD%A6%E4%B9%A0/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/">
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										工具包学习
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/27/java%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E5%85%B7%E5%8C%85%E5%AD%A6%E4%B9%A0/Comparable%E4%B8%8EComparator/">
+										Comparable与Comparator
+									</a>
+								</li>
+								<div class="article-toc" style="display: none;"></div>
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+								</li>
+								
+							</ul>
+			
+							<ul>
+								<li class="directory">
+									<a href="#" class="directory">
+										<i class="fa fa-plus-square-o"></i>
+										并发
+									</a>
+									
+							<ul>
+								<li class="file">
+									<a href="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/">
 										悲观锁与乐观锁
 									</a>
 								</li>
@@ -152,99 +181,48 @@
 
 	<!-- 引入正文 -->
 	<div id="content">
-		<h1 id="article-title">
-
-	悲观锁与乐观锁
-</h1>
-<div class="article-meta">
+		<div id="index">
 	
-	<span>小明同鞋</span>
-	<span>2020-10-21 14:16:33</span>
-    
-		<div id="article-categories">
-            
-                
-                    <span>
-                        <i class="fa fa-folder" aria-hidden="true"></i>
-                        <a href="/categories/并发/">并发</a>
-						
-                    </span>
-                
-            
-		</div>
-    
+		<div class="index-li">
+			<a href="/2020/10/27/java%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E5%85%B7%E5%8C%85%E5%AD%A6%E4%B9%A0/Comparable%E4%B8%8EComparator/">
+				<h2 class="index-title">
+					Comparable与Comparator
+				</h2>
+				<div class="index-brief">
+					Comparable[TOC]
+import java.util.Objects;
+
+/**
+ * 实现Comparator接口的类可以方便的排序， 覆写compareTo接口
+ * @author zxl
+ * @date 2020/10/27 18:00
+ */
+public class Stu
+					...
+				</div>
+			</a>
+                <div class="article-meta">
+				    <span>2020-10-27</span>
+                    
+                            
+                                
+                                    <span>
+                                        <i class="fa fa-folder" aria-hidden="true"></i>
+                                        <a href="/categories/JAVA/">JAVA</a>
+										
+                                    </span>
+                                
+                            
+                    
+                </div>
+		</div>	
+	
+	
+	<div id="index-paginator">
+		
+	</div>
 </div>
 
-<div id="article-content">
-	<h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p>[TOC]</p>
-<h3 id="1-悲观锁定义"><a href="#1-悲观锁定义" class="headerlink" title="1. 悲观锁定义"></a>1. 悲观锁定义</h3><p>在修改数据之前先锁定，再修改的方式被称之为悲观并发控制【Pessimistic Concurrency Control，缩写“PCC”，又名“悲观锁”】。</p>
-<p><strong>共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程。</strong></p>
-<p>悲观锁，具有强烈的独占和排他特性。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中<code>synchronized</code>和<code>ReentrantLock</code>等独占锁就是悲观锁思想的实现。</p>
-<h3 id="2-种类"><a href="#2-种类" class="headerlink" title="2. 种类"></a>2. 种类</h3><ol>
-<li>共享锁【shared locks】又称为读锁，简称S锁。多个事务对于同一数据可以共享一把锁，都能访问到数据，但是只能读不能修改。</li>
-<li>排他锁【exclusive locks】又称为写锁，简称X锁。排他锁就是不能与其他锁并存，</li>
-</ol>
-<h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><h3 id="2-乐观锁定义"><a href="#2-乐观锁定义" class="headerlink" title="2. 乐观锁定义"></a>2. 乐观锁定义</h3><p><strong>乐观锁一般会使用版本号机制或CAS算法实现。</strong>乐观锁适用于多读的应用类型，这样可以提高吞吐量<strong>，像数据库提供的类似于</strong>write_condition机制<strong>，其实都是提供的乐观锁。在Java中<code>java.util.concurrent.atomic</code>包下面的原子变量类就是使用了乐观锁的一种实现方式</strong>CAS<strong>实现的。</strong></p>
-<h3 id="3-两者比较"><a href="#3-两者比较" class="headerlink" title="3. 两者比较"></a>3. 两者比较</h3><table>
-<thead>
-<tr>
-<th></th>
-<th>乐观锁</th>
-<th>悲观锁</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>适用场景</td>
-<td><strong>适用于写比较少的情况下（多读场景）</strong></td>
-<td><strong>多写的场景下用悲观锁就比较合适</strong></td>
-</tr>
-<tr>
-<td>实现</td>
-<td></td>
-<td>1. 传统的关系型数据库的行锁，表锁等，读锁，写锁等<br />2. <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c8f997e7f75c">synchronized</a> 关键字</td>
-</tr>
-</tbody></table>
-
-</div>
-
-
-    <div class="post-guide">
-        <div class="item left">
-            
-        </div>
-        <div class="item right">
-            
-              <a href="/2020/10/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/">
-                oracle
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-              </a>
-            
-        </div>
-    </div>
-
-
-
-	<div id="vcomments"></div>
-
-
-<script>
-	
-		// 评论
-		new Valine({
-			av: AV,
-			el: '#vcomments',
-			notify: false,
-			verify: false,
-			path: window.location.pathname,
-			appId: '',
-			appKey: '',
-			placeholder: '请输入评论',
-			avatar: 'retro',
-			recordIP: false
-		})
-	
-	
-</script>
 	</div>
 	<div id="footer">
 	<p>
