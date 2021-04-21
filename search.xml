@@ -4,6 +4,87 @@
   
     
     <entry>
+      <title>并发编程实战</title>
+      <link href="2021/04/19/java%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/"/>
+      <url>2021/04/19/java%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/</url>
+      
+        <content type="html"><![CDATA[<p>[TOC]</p><h1 id="JAVA并发编程实战"><a href="#JAVA并发编程实战" class="headerlink" title="JAVA并发编程实战"></a>JAVA并发编程实战</h1><h2 id="第1章-简介"><a href="#第1章-简介" class="headerlink" title="第1章 简介"></a>第1章 简介</h2><h3 id="1-1-并发简史"><a href="#1-1-并发简史" class="headerlink" title="1.1 并发简史"></a>1.1 并发简史</h3><h4 id="1-1-1-操作系统实现多程序同时执行原因"><a href="#1-1-1-操作系统实现多程序同时执行原因" class="headerlink" title="1.1.1 操作系统实现多程序同时执行原因"></a>1.1.1 操作系统实现多程序同时执行原因</h4><ol><li><strong>资源利用率</strong>：在某些情况下，程序必须等某个外部操作完成后才能执行，而等待过程中无法执行其他工作。因此，等待过程中，可以执行其他程序，会提高资源利用率。</li><li><strong>公平性</strong>：不同用户和程序对计算机资源有同等的使用权。一种高效的运行方式是通过粗粒度的时机分片（Time Slicing）是用户和程序共享计算机资源。</li><li><strong>便利性</strong>：计算多个任务时，编写多个程序，每个程序执行一个任务，并在必要时相互通信。这比只一个程序计算所有任务更容易实现。</li></ol><h4 id="1-1-2-线程"><a href="#1-1-2-线程" class="headerlink" title="1.1.2 线程"></a>1.1.2 线程</h4><p>​    <strong>线程</strong>被称为轻量级进程，线程是操作系统基本的调度单位。如果没有明确的同步机制，线程是彼此独立执行的。同一个进程中的所有线程都共享进程的内存地址，因此线程都能访问到相同变量并在同一个堆上分配对象，                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </p><p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 </p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>- <a href="https://blog.csdn.net/wilson27/article/details/90339765">java中compareable和comparator的区别，比较器实现的原理！</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> JAVA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 并发 </tag>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>动态规划</title>
+      <link href="2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <url>2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</url>
+      
+        <content type="html"><![CDATA[<p>[TOC]</p><h1 id="动态规划算法"><a href="#动态规划算法" class="headerlink" title="动态规划算法"></a>动态规划算法</h1><h2 id="动态规划特点"><a href="#动态规划特点" class="headerlink" title="动态规划特点"></a>动态规划特点</h2><ol><li>计数<ol><li>有多少种方式走到右下角</li><li>有多少种方法选出k个数，使得和为sum</li></ol></li><li>求最大最小值<ol><li>从左上角走到右下角路径的最大数字和</li><li>最长上升子序列长度</li></ol></li><li>求存在性<ol><li>取石子游戏，先手是否必胜</li><li>能不能选出k个数，使得和为sum</li></ol></li></ol><h2 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h2><h3 id="1-确定状态"><a href="#1-确定状态" class="headerlink" title="1. 确定状态"></a>1. 确定状态</h3><ol><li>确定状态</li><li></li></ol><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>- <a href="https://www.cnblogs.com/roamman/archive/2010/08/17/1801392.html">位运算 之（1） 按位与（AND）&amp; 操作</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JNA的使用</title>
+      <link href="2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"/>
+      <url>2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>[TOC]</p><h2 id="一、JNA-Java-Native-Access"><a href="#一、JNA-Java-Native-Access" class="headerlink" title="一、JNA (Java Native Access)"></a>一、JNA (Java Native Access)</h2><p>JNA(Java Native Access)框架是一个开源的Java框架，建立在经典的JNI的基础之上的一个框架。</p><h2 id="二、使用步骤"><a href="#二、使用步骤" class="headerlink" title="二、使用步骤"></a>二、使用步骤</h2><blockquote><ol><li>需配置VM options: -Djava.library.path=<strong><em>[类库所在位置]</em></strong></li><li>jdk 需要根据dll环境进行配置是64位还是32位</li></ol></blockquote><h3 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1. 引入依赖"></a>1. 引入依赖</h3><pre><code class="xml">            &lt;dependency&gt;                &lt;groupId&gt;net.java.dev.jna&lt;/groupId&gt;                &lt;artifactId&gt;jna&lt;/artifactId&gt;                &lt;version&gt;5.5.0&lt;/version&gt;            &lt;/dependency&gt;</code></pre><h3 id="2-设置启动环境及参数"><a href="#2-设置启动环境及参数" class="headerlink" title="2. 设置启动环境及参数"></a>2. 设置启动环境及参数</h3><p>2.1 启动时设置java类库地址（or 把dll文件直接放在java类库路径下 or 使用System.load() 绝对路径加载）</p><blockquote><p>VM options: -Djava.library.path=<strong><em>[类库所在位置]</em></strong></p></blockquote><p><img src="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/%5C%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95%5Cimage-20210409173144363.png" alt="image-20210409173144363"></p><p>2.2 根据dll文件属性，配置对应的jre环境，64位 or 32位。</p><h3 id="3-系统引用"><a href="#3-系统引用" class="headerlink" title="3. 系统引用"></a>3. 系统引用</h3><p>3.1 根据dll名称，把dll文件内容加载至内存（注：不能有文件名后缀，且该dll文件必须在文件类库目录下）</p><pre><code class="java">System.loadLibrary(&quot;TestJNI&quot;); // 从java类库中加载System.load(&quot;C://Documents and Settings//TestJNI.dll&quot;); //or 从绝对路径中直接下载</code></pre><h3 id="4-创建接口，通过接口引用"><a href="#4-创建接口，通过接口引用" class="headerlink" title="4. 创建接口，通过接口引用"></a>4. 创建接口，通过接口引用</h3><pre><code class="java">// 继承Library or StdCallLibrarypublic interface ZT_DEV extends Library &#123;    // 通过反射加载对象        ZT_DEV lib = Native.load(&quot;ZT_DEV&quot;, ZT_DEV.class);        // ZT_DEV_OpenDevice为ZT_DEV.dll中的一个方法.(注意类型转换)        int ZT_DEV_OpenDevice(int nDeviceType, String strComm, IntByReference nHandle);    // c++ 中原生方法参数    // int ZT_DEV_OpenDevice(int nDeviceType,const char *strComm,int *nHandle)    &#125;public static void main(String[] args) throws Exception &#123;        System.load(&quot;D:\\code\\study\\my-study\\my-java\\src\\main\\resources\\DeviceDll\\ZT_DEV.dll&quot;);        System.out.println(System.getProperty(&quot;java.library.path&quot;));//        System.loadLibrary(&quot;ZT_DEV&quot;);        IntByReference intByReference = new IntByReference();        String msg = &quot;COM1:9600:E:8:1&quot;;        System.out.println(ZT_DEV.lib.ZT_DEV_OpenDevice(1,msg,intByReference));        System.out.println(intByReference.getValue());    &#125;</code></pre><h2 id="三、关系映射"><a href="#三、关系映射" class="headerlink" title="三、关系映射"></a>三、关系映射</h2><h3 id="1-java与C-关系映射"><a href="#1-java与C-关系映射" class="headerlink" title="1. java与C++关系映射"></a>1. java与C++关系映射</h3><table><thead><tr><th>C++</th><th>Java</th></tr></thead><tbody><tr><td>char *</td><td>String</td></tr><tr><td>word</td><td>short</td></tr><tr><td>byte</td><td>byte</td></tr><tr><td>byte[]</td><td>byte[]</td></tr><tr><td>dword</td><td>int</td></tr><tr><td>long</td><td>NativeLong</td></tr><tr><td>Void *</td><td>Pointer</td></tr><tr><td>lpvoid</td><td>Pointer</td></tr><tr><td>lpDword</td><td>IntByReference</td></tr><tr><td>HWND</td><td>HWND</td></tr><tr><td>char[]</td><td>byte[]</td></tr><tr><td>byte *</td><td>Pointer</td></tr></tbody></table><h3 id="2-java-与-c-语言关系映射"><a href="#2-java-与-c-语言关系映射" class="headerlink" title="2. java 与 c 语言关系映射"></a>2. java 与 c 语言关系映射</h3><table><thead><tr><th>Java</th><th>类型</th><th>C类型原生表现</th></tr></thead><tbody><tr><td>boolean</td><td>int</td><td>32位整数(可定制)</td></tr><tr><td>byte</td><td>char</td><td>8位整数</td></tr><tr><td>char</td><td>wchar_t</td><td>平台依赖</td></tr><tr><td>short</td><td>short</td><td>16位整数</td></tr><tr><td>int</td><td>int</td><td>32位整数</td></tr><tr><td>long</td><td>long,__int64</td><td>64位整数</td></tr><tr><td>float</td><td>float</td><td>32位浮点数</td></tr><tr><td>double</td><td>double</td><td>64位浮点数</td></tr><tr><td>Buffer/Pointer</td><td>pointer</td><td>平台依赖(32或64位指针)</td></tr><tr><td><T></T></td><td>pointer/array</td><td>32或64位指针(参数/返回值)邻接内存(结构体成员)</td></tr><tr><td>String</td><td>char*</td><td>/0结束的数组(nativeencodingorjna.encoding)</td></tr><tr><td>WString</td><td>wchar_t*</td><td>/0结束的数组(unicode)</td></tr><tr><td>String[]</td><td>char**</td><td>/0结束的数组的数组</td></tr><tr><td>WString[]</td><td>wchar_t**</td><td>/0结束的宽字符数组的数组</td></tr><tr><td>Structure</td><td>struct*/struct</td><td>指向结构体的指针(参数或返回值)<br>(或者明确指定是结构体指针)结构体(结构体的成员)<br>(或者明确指定是结构体)</td></tr><tr><td>Union</td><td>union</td><td>等同于结构体</td></tr><tr><td>Structure[]</td><td>struct[]</td><td>结构体的数组，邻接内存</td></tr><tr><td>Callback</td><td><T>(*fp)()</T></td><td>Java函数指针或原生函数指针</td></tr><tr><td>NativeMapped</td><td>varies</td><td>依赖于定义</td></tr><tr><td>NativeLong</td><td>long</td><td>平台依赖(32或64位整数)</td></tr><tr><td>PointerType</td><td>pointer</td><td>和Pointer相同</td></tr></tbody></table><h2 id="四、类库地址"><a href="#四、类库地址" class="headerlink" title="四、类库地址"></a>四、类库地址</h2><h3 id="4-1-windows"><a href="#4-1-windows" class="headerlink" title="4.1 windows"></a>4.1 windows</h3><pre><code class="java">System.getProperty(&quot;java.library.path&quot;);</code></pre><ol><li>和jre相关的目录</li><li>程序当前目录</li><li>Windows目录</li><li>系统目录(system32)</li><li>系统环境变量path指定的目录</li></ol><h3 id="4-2-linux-地址-及-jar启动"><a href="#4-2-linux-地址-及-jar启动" class="headerlink" title="4.2 linux 地址 及 jar启动"></a>4.2 linux 地址 及 jar启动</h3><blockquote><p>在/etc/profile 后面加上一行 export LB_LIBRARY_PATH=[新加类库地址]</p><pre><code class="java">java -jar -Djava.library.path=[新类库地址] XXX.jar</code></pre></blockquote><h2 id="五、出现错误及解决"><a href="#五、出现错误及解决" class="headerlink" title="五、出现错误及解决"></a>五、出现错误及解决</h2><ol><li><strong>java.lang.UnsatisfiedLinkError: no dcrf32 in java.library.path ：系统没找到对应的dll文件</strong></li></ol><p>解决：</p><ul><li>项目启动时设置 java库地址</li></ul><p><img src="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/%5C%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95%5Cimage-20210409171943084.png" alt="image-20210409171943084"></p><ul><li><p>把dll文件，放置到java库中。具体地址为：System.getProperty(“java.library.path”)</p></li><li><pre><code class="java">System.load(&quot;C://Documents and Settings//TestJNI.dll&quot;); //绝对路径</code></pre></li></ul><ol start="2"><li><strong>java.lang.UnsatisfiedLinkError: XXX\dcrf32.dll: Can’t load IA 32-bit .dll on a AMD 64-bit platform：dll环境和当前环境不匹配</strong></li></ol><p>解决：把当前jdk环境改成32位</p><ol start="3"><li><p><strong>java.lang.Error: Invalid memory access</strong></p><p>类型映射错误，java接口继承Library中的方法，必须和dll文件中的方法一致，且类型能相互映射上。如：dll中 *<em>_int</em>_** 必须映射为  <strong>IntByReference</strong></p></li></ol><ol start="4"><li><p><strong>Error looking up function ‘sum’: 找不到指定的程序。</strong></p><p>java接口方法和dll方法未匹配</p></li></ol><h2 id="六、参考链接"><a href="#六、参考链接" class="headerlink" title="六、参考链接"></a>六、参考链接</h2><p><a href="https://www.cnblogs.com/ylz8401/p/9605498.html">1. Java加载dll或so库文件的路径 java.library.path</a></p><p><a href="https://blog.csdn.net/hjing123/article/details/89709845">2. JNA实战笔记汇总（二）——JNA和C / C ++的数据类型映射（dll函数回调、结构体、指针)</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> JAVA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java调用c++方法 </tag>
+            
+            <tag> JNA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>netty分包粘包问题</title>
       <link href="2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/"/>
       <url>2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/</url>
@@ -38,6 +119,60 @@
       <url>2021/03/08/java%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/%E4%BD%8D%E8%BF%90%E7%AE%97/</url>
       
         <content type="html"><![CDATA[<h2 id="一、按位与-amp-操作"><a href="#一、按位与-amp-操作" class="headerlink" title="一、按位与&amp;操作"></a>一、按位与&amp;操作</h2><p>[TOC]</p><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    &amp; 与运算 两个位都是 1 时，结果才为 1，否则为 0。</p><pre><code class="java">  1 0 0 1 1&amp; 1 1 0 0 1------------------------------  1 0 0 0 1</code></pre><h3 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h3><h4 id="2-1-奇偶性判断"><a href="#2-1-奇偶性判断" class="headerlink" title="2.1 奇偶性判断"></a>2.1 奇偶性判断</h4><pre><code class="java">n&amp;1 == 0 则为偶数</code></pre><h4 id="2-2-判断n是否是2的正整数幂"><a href="#2-2-判断n是否是2的正整数幂" class="headerlink" title="2.2 判断n是否是2的正整数幂"></a>2.2 判断n是否是2的正整数幂</h4><p>​    原理：2的正整数幂始终比 前一个数字 多一个0</p><pre><code class="java">n&amp;(n-1) == 0 为2的正整数幂eg:    n  = 16 = 1 0 0 0 0 &amp; n-1 = 15 = 0 1 1 1 1------------------------------               0</code></pre><h4 id="2-3-统计n中1的个数"><a href="#2-3-统计n中1的个数" class="headerlink" title="2.3 统计n中1的个数"></a>2.3 统计n中1的个数</h4><ol><li><p>判断奇偶，计数器+1，右移（只能正整数，负数死循环）</p><pre><code class="java">int count1(int n)&#123;    // 负数取绝对值    n = n &lt; 0 ? Math.abs(n) : n;    int count = 0;    while (n!=0)&#123;        if((n&amp;1) != 0)&#123;            count++;        &#125;        n&gt;&gt;=1;    &#125;    return count;&#125;</code></pre></li><li><p>根据最大正整数幂</p><pre><code class="java">int count1(int n)&#123;    // 负数取绝对值    n = n &lt; 0 ? Math.abs(n) : n;    int count = 0;    while (n!=0)&#123;        n = (n - 1) &amp; n;        count++;    &#125;    return count;&#125;</code></pre></li></ol><h2 id="二、-按位或运算"><a href="#二、-按位或运算" class="headerlink" title="二、 按位或运算 |"></a>二、 按位或运算 |</h2><h3 id="1-定义-1"><a href="#1-定义-1" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​        | 或运算 两个位都是 0 时，结果才为 0，否则为 1。</p><pre><code class="java">  1 0 0 1 1| 1 1 0 0 1------------------------------  1 1 0 1 1</code></pre><h2 id="三、异或运算"><a href="#三、异或运算" class="headerlink" title="三、异或运算 ^"></a>三、异或运算 ^</h2><h3 id="1-定义-2"><a href="#1-定义-2" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​        ^ 异或运算，两个位相同则为 0，不同则为 1。</p><pre><code class="java">  1 0 0 1 1^ 1 1 0 0 1-----------------------------  0 1 0 1 0</code></pre><h2 id="四、取反运算"><a href="#四、取反运算" class="headerlink" title="四、取反运算 ~"></a>四、取反运算 ~</h2><h3 id="1-定义-3"><a href="#1-定义-3" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    ~ 取反运算，0 则变为 1，1 则变为 0。</p><pre><code class="java">~ 1 0 0 1 1-----------------------------  0 1 1 0 0</code></pre><h2 id="五、左移运算-lt-lt"><a href="#五、左移运算-lt-lt" class="headerlink" title="五、左移运算 &lt;&lt;"></a>五、左移运算 &lt;&lt;</h2><h3 id="1-定义-4"><a href="#1-定义-4" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    &lt;&lt; 左移运算，向左进行移位操作，高位丢弃，低位补 0。</p><pre><code class="java">int a = 8;a &lt;&lt; 3;移位前：0000 0000 0000 0000 0000 0000 0000 1000移位后：0000 0000 0000 0000 0000 0000 0100 0000</code></pre><h3 id="2-应用场景-1"><a href="#2-应用场景-1" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h3><ol><li>实现2的幂次方乘法   </li></ol><pre><code class="java">int a = 2;a &lt;&lt; 1; ---&gt; a*2 = 4a &lt;&lt; 3; ---&gt; a*2³ = 16</code></pre><ol start="2"><li></li></ol><h2 id="六、右移运算-gt-gt"><a href="#六、右移运算-gt-gt" class="headerlink" title="六、右移运算 &gt;&gt;"></a>六、右移运算 &gt;&gt;</h2><h3 id="1-定义-5"><a href="#1-定义-5" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    &gt;&gt; 右移运算，向右进行移位操作，对无符号数，高位补 0，对于有符号数，高位补符号位。</p><pre><code>int a = 8;a &gt;&gt; 3;移位前：0000 0000 0000 0000 0000 0000 0000 1000移位后：0000 0000 0000 0000 0000 0000 0000 0001int a = -8;a &gt;&gt; 3;移位前：1111 1111 1111 1111 1111 1111 1111 1000移位前：1111 1111 1111 1111 1111 1111 1111 1111</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>- <a href="https://www.cnblogs.com/roamman/archive/2010/08/17/1801392.html">位运算 之（1） 按位与（AND）&amp; 操作</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> JAVA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 按位与 </tag>
+            
+            <tag> 位运算 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>位运算</title>
+      <link href="2021/03/08/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+      <url>2021/03/08/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、按位与-amp-操作"><a href="#一、按位与-amp-操作" class="headerlink" title="一、按位与&amp;操作"></a>一、按位与&amp;操作</h2><p>[TOC]</p><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    &amp; 与运算 两个位都是 1 时，结果才为 1，否则为 0。</p><pre><code class="java">  1 0 0 1 1&amp; 1 1 0 0 1------------------------------  1 0 0 0 1</code></pre><h3 id="2-应用场景"><a href="#2-应用场景" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h3><h4 id="2-1-奇偶性判断"><a href="#2-1-奇偶性判断" class="headerlink" title="2.1 奇偶性判断"></a>2.1 奇偶性判断</h4><pre><code class="java">n&amp;1 == 0 则为偶数</code></pre><h4 id="2-2-判断n是否是2的正整数幂"><a href="#2-2-判断n是否是2的正整数幂" class="headerlink" title="2.2 判断n是否是2的正整数幂"></a>2.2 判断n是否是2的正整数幂</h4><p>​    原理：2的正整数幂始终比 前一个数字 多一个0</p><pre><code class="java">n&amp;(n-1) == 0 为2的正整数幂eg:    n  = 16 = 1 0 0 0 0 &amp; n-1 = 15 = 0 1 1 1 1------------------------------               0</code></pre><h4 id="2-3-统计n中1的个数"><a href="#2-3-统计n中1的个数" class="headerlink" title="2.3 统计n中1的个数"></a>2.3 统计n中1的个数</h4><ol><li><p>判断奇偶，计数器+1，右移（只能正整数，负数死循环）</p><pre><code class="java">int count1(int n)&#123;    // 负数取绝对值    n = n &lt; 0 ? Math.abs(n) : n;    int count = 0;    while (n!=0)&#123;        if((n&amp;1) != 0)&#123;            count++;        &#125;        n&gt;&gt;=1;    &#125;    return count;&#125;</code></pre></li><li><p>根据最大正整数幂</p><pre><code class="java">int count1(int n)&#123;    // 负数取绝对值    n = n &lt; 0 ? Math.abs(n) : n;    int count = 0;    while (n!=0)&#123;        n = (n - 1) &amp; n;        count++;    &#125;    return count;&#125;</code></pre></li></ol><h2 id="二、-按位或运算"><a href="#二、-按位或运算" class="headerlink" title="二、 按位或运算 |"></a>二、 按位或运算 |</h2><h3 id="1-定义-1"><a href="#1-定义-1" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​        | 或运算 两个位都是 0 时，结果才为 0，否则为 1。</p><pre><code class="java">  1 0 0 1 1| 1 1 0 0 1------------------------------  1 1 0 1 1</code></pre><h2 id="三、异或运算"><a href="#三、异或运算" class="headerlink" title="三、异或运算 ^"></a>三、异或运算 ^</h2><h3 id="1-定义-2"><a href="#1-定义-2" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​        ^ 异或运算，两个位相同则为 0，不同则为 1。</p><pre><code class="java">  1 0 0 1 1^ 1 1 0 0 1-----------------------------  0 1 0 1 0</code></pre><h2 id="四、取反运算"><a href="#四、取反运算" class="headerlink" title="四、取反运算 ~"></a>四、取反运算 ~</h2><h3 id="1-定义-3"><a href="#1-定义-3" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    ~ 取反运算，0 则变为 1，1 则变为 0。</p><pre><code class="java">~ 1 0 0 1 1-----------------------------  0 1 1 0 0</code></pre><h2 id="五、左移运算-lt-lt"><a href="#五、左移运算-lt-lt" class="headerlink" title="五、左移运算 &lt;&lt;"></a>五、左移运算 &lt;&lt;</h2><h3 id="1-定义-4"><a href="#1-定义-4" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    &lt;&lt; 左移运算，向左进行移位操作，高位丢弃，低位补 0。</p><pre><code class="java">int a = 8;a &lt;&lt; 3;移位前：0000 0000 0000 0000 0000 0000 0000 1000移位后：0000 0000 0000 0000 0000 0000 0100 0000</code></pre><h3 id="2-应用场景-1"><a href="#2-应用场景-1" class="headerlink" title="2. 应用场景"></a>2. 应用场景</h3><ol><li>实现2的幂次方乘法   </li></ol><pre><code class="java">int a = 2;a &lt;&lt; 1; ---&gt; a*2 = 4a &lt;&lt; 3; ---&gt; a*2³ = 16</code></pre><ol start="2"><li></li></ol><h2 id="六、右移运算-gt-gt"><a href="#六、右移运算-gt-gt" class="headerlink" title="六、右移运算 &gt;&gt;"></a>六、右移运算 &gt;&gt;</h2><h3 id="1-定义-5"><a href="#1-定义-5" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>​    &gt;&gt; 右移运算，向右进行移位操作，对无符号数，高位补 0，对于有符号数，高位补符号位。</p><pre><code>int a = 8;a &gt;&gt; 3;移位前：0000 0000 0000 0000 0000 0000 0000 1000移位后：0000 0000 0000 0000 0000 0000 0000 0001int a = -8;a &gt;&gt; 3;移位前：1111 1111 1111 1111 1111 1111 1111 1000移位前：1111 1111 1111 1111 1111 1111 1111 1111</code></pre><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>- <a href="https://www.cnblogs.com/roamman/archive/2010/08/17/1801392.html">位运算 之（1） 按位与（AND）&amp; 操作</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> JAVA </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 按位与 </tag>
+            
+            <tag> 位运算 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>位运算</title>
+      <link href="2021/03/08/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E4%BC%98%E5%8C%96/"/>
+      <url>2021/03/08/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E4%BC%98%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、按位与-amp-操作"><a href="#一、按位与-amp-操作" class="headerlink" title="一、按位与&amp;操作"></a>一、按位与&amp;操作</h2><p>[TOC]</p><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h3><p>ü -sxx </p>]]></content>
       
       
       <categories>

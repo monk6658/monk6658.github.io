@@ -6,24 +6,19 @@
   <meta name="keywords" content=" pfx , cer ">
   <meta name="description" content="证书转换 | 小明的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="netty自定义协议，实现分包粘包问题。">
+<meta name="description" content="关于java的并发编程实战书本笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="netty分包粘包问题">
-<meta property="og:url" content="https://monk6658.github.io/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="并发编程实战">
+<meta property="og:url" content="https://monk6658.github.io/2021/04/19/java%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/index.html">
 <meta property="og:site_name" content="小明的博客">
-<meta property="og:description" content="netty自定义协议，实现分包粘包问题。">
+<meta property="og:description" content="关于java的并发编程实战书本笔记。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://monk6658.github.io/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/%5Cnetty%5Cimage-20210331151558717.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/%5Cnetty%5Cimage-20210331152602573.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/%5Cnetty%5Cimage-20210331153715016.png">
-<meta property="article:published_time" content="2021-03-30T06:16:33.000Z">
-<meta property="article:modified_time" content="2021-03-31T07:58:11.297Z">
+<meta property="article:published_time" content="2021-04-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-19T09:12:20.517Z">
 <meta property="article:author" content="小明同鞋">
 <meta property="article:tag" content="并发">
-<meta property="article:tag" content="锁netty">
-<meta property="article:tag" content="分包粘包">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://monk6658.github.io/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/%5Cnetty%5Cimage-20210331151558717.png">
 
 
 <link rel="icon" href="/img/head.jpg">
@@ -111,7 +106,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(10)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(15)</small></div></li>
     
         
             
@@ -123,7 +118,7 @@
     
         
             
-            <li><div data-rel="JAVA">JAVA<small>(2)</small></div>
+            <li><div data-rel="JAVA">JAVA<small>(6)</small></div>
                 
             </li>
             
@@ -153,6 +148,14 @@
             
         
     
+        
+            
+            <li><div data-rel="算法">算法<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -163,7 +166,7 @@
     </div>
     <div><a  class="friends">Friends</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="10">
+<input type="hidden" id="yelog_site_posts_number" value="15">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -226,6 +229,18 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java调用c++方法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JNA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>oracle</a>
             </li>
         
@@ -255,6 +270,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>分包粘包</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态规划</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -304,6 +323,30 @@
     
     <nav id="title-list-nav">
         
+        <a  class="All JAVA "
+           href="/2021/04/19/java%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/"
+           data-tag="并发,java"
+           data-author="" >
+            <span class="post-title" title="并发编程实战">并发编程实战</span>
+            <span class="post-date" title="2021-04-19 00:00:00">2021/04/19</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
+           data-tag="java,动态规划"
+           data-author="" >
+            <span class="post-title" title="动态规划">动态规划</span>
+            <span class="post-date" title="2021-04-14 14:16:33">2021/04/14</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"
+           data-tag="java调用c++方法,JNA"
+           data-author="" >
+            <span class="post-title" title="JNA的使用">JNA的使用</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
         <a  class="All 并发、netty "
            href="/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/"
            data-tag="并发,锁netty,分包粘包"
@@ -314,6 +357,22 @@
         
         <a  class="All JAVA "
            href="/2021/03/08/java%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/%E4%BD%8D%E8%BF%90%E7%AE%97/"
+           data-tag="按位与,位运算"
+           data-author="" >
+            <span class="post-title" title="位运算">位运算</span>
+            <span class="post-date" title="2021-03-08 14:16:33">2021/03/08</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/03/08/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"
+           data-tag="按位与,位运算"
+           data-author="" >
+            <span class="post-title" title="位运算">位运算</span>
+            <span class="post-date" title="2021-03-08 14:16:33">2021/03/08</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/03/08/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E4%BC%98%E5%8C%96/"
            data-tag="按位与,位运算"
            data-author="" >
             <span class="post-title" title="位运算">位运算</span>
