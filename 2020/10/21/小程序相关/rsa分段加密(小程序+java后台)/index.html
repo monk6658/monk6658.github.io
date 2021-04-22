@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>证书转换 | 小明的博客</title>
-  <meta name="keywords" content=" pfx , cer ">
-  <meta name="description" content="证书转换 | 小明的博客">
+  <title>rsa分段加密（小程序+java后台） | 小明的博客</title>
+  <meta name="keywords" content=" 小程序 , RSA分段 ">
+  <meta name="description" content="rsa分段加密（小程序+java后台） | 小明的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="java中位运算的使用及相关应用场景。">
 <meta property="og:type" content="article">
@@ -479,9 +479,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-工具安装使用/证书/证书转换" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-小程序相关/rsa分段加密(小程序+java后台)" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">证书转换</h1>
+        <h1 class="article-title">rsa分段加密（小程序+java后台）</h1>
     
     <div class="article-meta">
         
@@ -491,7 +491,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="工具">工具</a>
+            <a  data-rel="小程序">小程序</a>
             
         </span>
         
@@ -499,16 +499,16 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">pfx</a>
+            <a class="color4">小程序</a>
             
-            <a class="color4">cer</a>
+            <a class="color1">RSA分段</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-03-04 16:06:57'>2020-10-28 14:16</time>
+            Created At : <time class="date" title='Updated At: 2021-04-22 10:13:06'>2020-10-21 14:16</time>
         
     </div>
     <div class="article-meta">
@@ -530,7 +530,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8FRSA%E5%8A%A0%E5%AF%86"><span class="toc-text">小程序RSA加密</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%A6%82%E8%BF%B0"><span class="toc-text">问题概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="toc-text">解决思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -546,23 +546,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>安装好OpenSSL，然后到bin目录下，执行以下命令即可完成转换：</p>
-<p>openssl pkcs12 -nodes -nokeys -in 1.pfx -passin pass:证书密码 -out 1.cer</p>
-<p>如无需加密pem中私钥，可以添加选项-nodes；</p>
-<p>\1. 点击1.cer，安装cer证书</p>
-<p>2.从pfx提取密钥信息，并转换为key格式（pfx使用pkcs12模式补足）</p>
-<p>  （1）提取密钥对</p>
-<p>​    openssl pkcs12 -in 1.pfx -nocerts -nodes -out 1.key</p>
-<p>​    //如果pfx证书已加密，会提示输入密码。如果cer证书没有安装，则密码没法验证</p>
-<p>  （2）从密钥对提取私钥</p>
-<p>​    openssl rsa -in  1.key -out 1_pri.key</p>
-<p>  （3）从密钥对提取公钥</p>
-<p>​    openssl rsa -in 1.key -pubout -out 1_pub.key</p>
-<p>  （4）因为RSA算法使用的是pkcs8模式补足，需要对提取的私钥进一步处理</p>
-<p>​    openssl pkcs8 -topk8 -inform PEM -in 1_pri.key -outform PEM -nocrypt</p>
-<p>​     复制窗口中生成的密钥，保存为1_pri_pkcs8.key</p>
-<p>  （5）得到密钥对1_pri_pkcs8.key和1_pub.key</p>
-<p>- <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39081974/article/details/81059022">openssl 安装参考链接</a></p>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8FRSA%E5%8A%A0%E5%AF%86"><span class="toc-text">小程序RSA加密</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E6%A6%82%E8%BF%B0"><span class="toc-text">问题概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%80%9D%E8%B7%AF"><span class="toc-text">解决思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">解决方案</span></a></li></ol></li></ol></div></p>
+<h1 id="小程序RSA加密"><a href="#小程序RSA加密" class="headerlink" title="小程序RSA加密"></a>小程序RSA加密</h1><p>​    小程序借用了一个大哥blog，如有侵权，请联系作者，立即整改。</p>
+<h2 id="问题概述"><a href="#问题概述" class="headerlink" title="问题概述"></a>问题概述</h2><p>​    小程序进行rsa加密时，出现加密失败、中文加密乱码，java加密小程序解不开，小程序加密java解密失败等相关问题。</p>
+<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><pre><code>1. 使用分段加密解决大数据加密
+ 2. 中文加密之前转码（转16进制或其他）</code></pre>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p> <a href="rsa%E5%88%86%E6%AE%B5%E5%8A%A0%E5%AF%86(%E5%B0%8F%E7%A8%8B%E5%BA%8F+java%E5%90%8E%E5%8F%B0)/rsa%E5%88%86%E6%AE%B5%E5%8A%A0%E5%AF%86.rar">rsa分段加密.rar</a> </p>
+<p>注：时间过长，等下次使用再次整理规范好了。主要使用方法如下：</p>
+<ol>
+<li>java main方法生成对应的加密结果（<font color="red">中文需要进行先转码操作，不然个别中文因为编码规范，会出现乱码问题</font>）</li>
+<li>小程序直接用java加密结果进行解密即可（反之也可）</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 monk6658@163.com </span>
