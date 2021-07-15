@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>centos 安装基本环境支持 | 小明的博客</title>
+  <meta name="keywords" content=" RabbitMQ , jdk , Erlang , frp , centos ">
+  <meta name="description" content="centos 安装基本环境支持 | 小明的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="NullPointerException 没有打印异常栈问题追踪。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NullPointerException 没有打印异常栈问题追踪">
+<meta property="og:url" content="https://monk6658.github.io/2021/06/17/java%E5%AD%A6%E4%B9%A0/jvm/NullPointerException%20%E6%B2%A1%E6%9C%89%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E6%A0%88%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA/index.html">
+<meta property="og:site_name" content="小明的博客">
+<meta property="og:description" content="NullPointerException 没有打印异常栈问题追踪。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-17T06:16:33.000Z">
+<meta property="article:modified_time" content="2021-06-17T10:15:00.561Z">
+<meta property="article:author" content="小明同鞋">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="异常">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/head.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="小明的博客" type="application/atom+xml">
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/head.jpg" />
+</a>
+<div class="author">
+    <span>小明同鞋</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/monk6658" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1245141646&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:monk6658@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="All">All<small>(21)</small></div></li>
+    
+        
+            
+            <li><div data-rel="工具">工具<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JAVA">JAVA<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JVM">JVM<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="oracle">oracle<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="中间件">中间件<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="小程序">小程序<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="并发">并发<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="并发、netty">并发、netty<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a  class="friends">Friends</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="21">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">原hexo主题博主</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>centos</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cer</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Comparable</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Comparator</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Erlang</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>frp</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java调用c++方法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>jdk</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JNA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JvisualVm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JVM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oracle</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pfx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RabbitMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RSA分段</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag2</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag3</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>中间件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>主从</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>位运算</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分包粘包</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态规划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>博客</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>哨兵</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>小程序</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>并发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>异常</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>微信支付</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>按位与</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>排序</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>支付宝</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>死锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁netty</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁机制</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All JAVA "
+           href="/2021/06/17/java%E5%AD%A6%E4%B9%A0/jvm/NullPointerException%20%E6%B2%A1%E6%9C%89%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E6%A0%88%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA/"
+           data-tag="JVM,异常"
+           data-author="" >
+            <span class="post-title" title="NullPointerException 没有打印异常栈问题追踪">NullPointerException 没有打印异常栈问题追踪</span>
+            <span class="post-date" title="2021-06-17 14:16:33">2021/06/17</span>
+        </a>
+        
+        <a  class="All 中间件 "
+           href="/2021/06/05/%E4%B8%AD%E9%97%B4%E4%BB%B6/rabbitmq/RabbitMQ%E4%BD%BF%E7%94%A8/"
+           data-tag="中间件,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="RabbitMQ 实战">RabbitMQ 实战</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2021/06/05/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/linux/centos%20%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%94%AF%E6%8C%81/"
+           data-tag="RabbitMQ,jdk,Erlang,frp,centos"
+           data-author="" >
+            <span class="post-title" title="centos 安装基本环境支持">centos 安装基本环境支持</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/05/20/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/redis%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%93%A8%E5%85%B5/redis%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%8F%8A%E5%93%A8%E5%85%B5/"
+           data-tag="redis,主从,哨兵"
+           data-author="" >
+            <span class="post-title" title="redis搭建主从及哨兵">redis搭建主从及哨兵</span>
+            <span class="post-date" title="2021-05-20 14:16:33">2021/05/20</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/21/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2021-04-21 14:16:33">2021/04/21</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/19/java%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/"
+           data-tag="并发,java"
+           data-author="" >
+            <span class="post-title" title="并发编程实战">并发编程实战</span>
+            <span class="post-date" title="2021-04-19 00:00:00">2021/04/19</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
+           data-tag="动态规划,java"
+           data-author="" >
+            <span class="post-title" title="动态规划">动态规划</span>
+            <span class="post-date" title="2021-04-14 14:16:33">2021/04/14</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"
+           data-tag="java调用c++方法,JNA"
+           data-author="" >
+            <span class="post-title" title="JNA的使用">JNA的使用</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All JVM "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/JvisualVm%E6%8F%90%E7%A4%BA%E6%97%A0%E6%B3%95%E7%9B%91%E8%A7%86%E6%9C%AC%E5%9C%B0Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/"
+           data-tag="JvisualVm,JVM"
+           data-author="" >
+            <span class="post-title" title="JvisualVm提示无法监视本地Java应用程序解决办法">JvisualVm提示无法监视本地Java应用程序解决办法</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/RMI%20TCP%20CONNECTION%20%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/"
+           data-tag="java调用c++方法,JNA"
+           data-author="" >
+            <span class="post-title" title="JNA的使用">JNA的使用</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All 并发、netty "
+           href="/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/"
+           data-tag="并发,锁netty,分包粘包"
+           data-author="" >
+            <span class="post-title" title="netty分包粘包问题">netty分包粘包问题</span>
+            <span class="post-date" title="2021-03-30 14:16:33">2021/03/30</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/03/08/java%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/%E4%BD%8D%E8%BF%90%E7%AE%97/"
+           data-tag="按位与,位运算"
+           data-author="" >
+            <span class="post-title" title="位运算">位运算</span>
+            <span class="post-date" title="2021-03-08 14:16:33">2021/03/08</span>
+        </a>
+        
+        <a  class="All oracle "
+           href="/2020/12/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"
+           data-tag="sql,oracle,函数"
+           data-author="" >
+            <span class="post-title" title="oracle基础语法">oracle基础语法</span>
+            <span class="post-date" title="2020-12-17 00:00:00">2020/12/17</span>
+        </a>
+        
+        <a  class="All 并发 "
+           href="/2020/11/03/%E5%B9%B6%E5%8F%91/Java%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"
+           data-tag="锁机制,并发,死锁"
+           data-author="" >
+            <span class="post-title" title="Java 并发基础常见面试题总结">Java 并发基础常见面试题总结</span>
+            <span class="post-date" title="2020-11-03 14:16:33">2020/11/03</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/10/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/hexo/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"
+           data-tag="hexo,博客"
+           data-author="" >
+            <span class="post-title" title="hexo搭建静态博客">hexo搭建静态博客</span>
+            <span class="post-date" title="2020-10-28 14:16:33">2020/10/28</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/10/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/%E8%AF%81%E4%B9%A6/%E8%AF%81%E4%B9%A6%E8%BD%AC%E6%8D%A2/"
+           data-tag="pfx,cer"
+           data-author="" >
+            <span class="post-title" title="证书转换">证书转换</span>
+            <span class="post-date" title="2020-10-28 14:16:33">2020/10/28</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2020/10/27/java%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E5%85%B7%E5%8C%85%E5%AD%A6%E4%B9%A0/Comparable%E4%B8%8EComparator/"
+           data-tag="Comparable,Comparator,排序"
+           data-author="" >
+            <span class="post-title" title="Comparable与Comparator">Comparable与Comparator</span>
+            <span class="post-date" title="2020-10-27 14:16:33">2020/10/27</span>
+        </a>
+        
+        <a  class="All 并发 "
+           href="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/"
+           data-tag="锁机制,并发"
+           data-author="" >
+            <span class="post-title" title="悲观锁与乐观锁">悲观锁与乐观锁</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All 小程序 "
+           href="/2020/10/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3/rsa%E5%88%86%E6%AE%B5%E5%8A%A0%E5%AF%86(%E5%B0%8F%E7%A8%8B%E5%BA%8F+java%E5%90%8E%E5%8F%B0)/"
+           data-tag="小程序,RSA分段"
+           data-author="" >
+            <span class="post-title" title="rsa分段加密（小程序+java后台）">rsa分段加密（小程序+java后台）</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All oracle "
+           href="/2020/10/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/"
+           data-tag="运维,tag2,tag3"
+           data-author="" >
+            <span class="post-title" title="oracle 误删数据、表的恢复">oracle 误删数据、表的恢复</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/03/25/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/%E8%81%9A%E5%90%88%E6%94%AF%E4%BB%98%E6%8B%89%E8%B5%B7%E6%B5%81%E7%A8%8B/%E8%81%9A%E5%90%88%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B/"
+           data-tag="微信支付,支付宝"
+           data-author="" >
+            <span class="post-title" title="聚合支付">聚合支付</span>
+            <span class="post-date" title="2020-03-25 14:16:33">2020/03/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-工具安装使用/linux/centos 安装基本环境支持" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">centos 安装基本环境支持</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Linux">Linux</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">RabbitMQ</a>
+            
+            <a class="color4">jdk</a>
+            
+            <a class="color2">Erlang</a>
+            
+            <a class="color4">frp</a>
+            
+            <a class="color2">centos</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2021-06-07 16:33:17'>2021-06-05 14:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">一、安装 frp 内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">1. 服务端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">2. 客户端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F"><span class="toc-text">3. 注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E5%8F%8A%E5%8D%B8%E8%BD%BD-jdk"><span class="toc-text">二、安装及卸载 jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85jdk"><span class="toc-text">1. 安装jdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDjdk"><span class="toc-text">2. 卸载jdk</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">三、安装RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Erlang"><span class="toc-text">1. 安装Erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDerlang"><span class="toc-text">2. 卸载erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">3. 安装RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-RabbitMQ%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">4. RabbitMQ用户管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">一、安装 frp 内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">1. 服务端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">2. 客户端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F"><span class="toc-text">3. 注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E5%8F%8A%E5%8D%B8%E8%BD%BD-jdk"><span class="toc-text">二、安装及卸载 jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85jdk"><span class="toc-text">1. 安装jdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDjdk"><span class="toc-text">2. 卸载jdk</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">三、安装RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Erlang"><span class="toc-text">1. 安装Erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDerlang"><span class="toc-text">2. 卸载erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">3. 安装RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-RabbitMQ%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">4. RabbitMQ用户管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div></p>
+<h1 id="一、安装-frp-内网穿透"><a href="#一、安装-frp-内网穿透" class="headerlink" title="一、安装 frp 内网穿透"></a>一、安装 frp 内网穿透</h1><p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/blob/master/README_zh.md">frp</a>就是一个<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24723688">反向代理软件</a>，它体积轻量但功能很强大，可以<strong>使处于内网或防火墙后的设备对外界提供服务</strong>，它支持HTTP、TCP、UDP等众多协议。</p>
+<h2 id="1-服务端配置步骤"><a href="#1-服务端配置步骤" class="headerlink" title="1. 服务端配置步骤"></a>1. 服务端配置步骤</h2><ol>
+<li>下载安装包</li>
+</ol>
+<pre><code class="shell">wget https://github.com/fatedier/frp/releases/download/v0.13.0/frp_0.13.0_linux_amd64.tar.gz</code></pre>
+<ol start="2">
+<li><p>解压安装包</p>
+<pre><code class="shell">tar -zxvf frp_0.13.0_linux_amd64.tar.gz</code></pre>
+</li>
+<li><p>进入安装包内</p>
+<pre><code class="shell">cd frp_0.13.0_linux_amd64</code></pre>
+</li>
+</ol>
+<p>4.修改服务器配置文件(配置样例如下)</p>
+<pre><code class="shell">vim frps.ini</code></pre>
+<blockquote>
+<p>[common]<br>bind_port = 7000 #这个端口指的是客户端与服务端通信使用的端口</p>
+<p>#配置 dashboard（可选）</p>
+<p>dashboard_port = 7500</p>
+<p>#dashboard 用户名密码，默认都为 admin</p>
+<p>dashboard_user = admin<br>dashboard_pwd = admin</p>
+<p>#web远程访问端口</p>
+<p>#vhost_http_port = 80<br>#vhost_http_port = 7001</p>
+</blockquote>
+<ol start="5">
+<li>后台启动（在frp_0.13.0_linux_amd64 目录下）<pre><code class="shell">nohup ./frps &amp;</code></pre>
+</li>
+</ol>
+<h2 id="2-客户端配置步骤"><a href="#2-客户端配置步骤" class="headerlink" title="2. 客户端配置步骤"></a>2. 客户端配置步骤</h2><blockquote>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">frp下载</a></p>
+</li>
+<li><p>修改配置文件 <strong>frpc.ini</strong> 如下</p>
+<p>[common]<br>server_addr = xx.xxx.xxx.xxx  # 公网服务器ip<br>server_port = 7000 </p>
+</li>
+</ol>
+<p>  [ysf]    –可添加多个，每一个名字一样才行</p>
+<p>  #web服务网络类型,可选http https</p>
+<p>  type = tcp<br>  local_ip = 192.168.1.29</p>
+<p>  #内网机器的web服务端口</p>
+<p>  local_port = 8881<br>  remote_port = 8881</p>
+<ol start="3">
+<li>在<strong>cmd</strong>指令中启动</li>
+</ol>
+</blockquote>
+<pre><code class="shell">frpc.exe</code></pre>
+<h2 id="3-注意"><a href="#3-注意" class="headerlink" title="3. 注意"></a>3. 注意</h2><ol>
+<li>服务端<strong>frp</strong>配置的所有公网端口均需放开防火墙策略</li>
+<li>如是阿里云的小伙伴，还需要在安全组中 开发端口策略</li>
+</ol>
+<h1 id="二、安装及卸载-jdk"><a href="#二、安装及卸载-jdk" class="headerlink" title="二、安装及卸载 jdk"></a>二、安装及卸载 jdk</h1><h2 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1. 安装jdk"></a>1. 安装jdk</h2><ol>
+<li><p>下载安装包</p>
+<pre><code class="shell">wget --no-cookies --no-check-certificate --header &quot;Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie&quot; &quot;http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141-linux-x64.tar.gz&quot;</code></pre>
+</li>
+<li><p>解压</p>
+<pre><code class="shell">tar -zxvf jdk-8u141-linux-x64.tar.gz</code></pre>
+</li>
+<li><p>编辑环境文件</p>
+</li>
+</ol>
+<pre><code class="shell">vim /etc/profile</code></pre>
+<ol start="4">
+<li>在文末添加jdk位置</li>
+</ol>
+<blockquote>
+<p>JAVA_HOME=/root/java/jdk1.8.0_25  # jdk解压位置，可通过pwd指令查看</p>
+<p>PATH=$JAVA_HOME/bin:$PATH</p>
+<p>CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar<br>5. 是配置文件生效</p>
+</blockquote>
+<pre><code class="shell">source /etc/profile</code></pre>
+<ol start="6">
+<li>查看是否成功<pre><code class="shell">java -version</code></pre>
+</li>
+</ol>
+<h2 id="2-卸载jdk"><a href="#2-卸载jdk" class="headerlink" title="2. 卸载jdk"></a>2. 卸载jdk</h2><p>1.<strong>查询系统是否以安装jdk</strong></p>
+<pre><code class="shell">rpm -qa|grep java</code></pre>
+<p>2.<strong>卸载已安装的jdk</strong> (.noarch文件可以不卸载)</p>
+<pre><code class="shell">rpm -e --nodeps xxx</code></pre>
+<p>3.验证一下是还有jdk</p>
+<pre><code class="shell">rpm -qa|grep java
+java -version</code></pre>
+<h1 id="三、安装RabbitMQ"><a href="#三、安装RabbitMQ" class="headerlink" title="三、安装RabbitMQ"></a>三、安装RabbitMQ</h1><p>RabbitMQ是一个开源的免费的消息队列系统，一端往消息队列中不断写入消息，而另一端则可以读取或者订阅队列中的消息。它是用Erlang编写的，并实现了高级消息队列协议（AMQP）(Advanved Message Queue Protocol)。</p>
+<h2 id="1-安装Erlang"><a href="#1-安装Erlang" class="headerlink" title="1. 安装Erlang"></a>1. 安装Erlang</h2><p>1.安装依赖</p>
+<pre><code class="shell">yum -y install gcc glibc-devel make ncurses-devel openssl-devel xmlto perl wget gtk2-devel binutils-devel</code></pre>
+<p>2.安装erlang</p>
+<pre><code class="shell">wget http://erlang.org/download/otp_src_22.0.tar.gz</code></pre>
+<p>3.解压</p>
+<pre><code class="shell">tar -zxvf otp_src_22.0.tar.gz</code></pre>
+<p>4.进入目录下并且配置安装规则</p>
+<pre><code class="shell">cd otp_src_22.0/ &amp;&amp; ./configure --prefix /root/erlang/otp_src_22.0 &amp;&amp; make &amp;&amp; make install</code></pre>
+<p>5.添加环境变量</p>
+<pre><code class="shell">echo &#39;export PATH=$PATH:/root/erlang/otp_src_22.0/bin&#39; &gt;&gt; /etc/profile</code></pre>
+<p>6.使添加环境变量生效</p>
+<pre><code class="shell">source /etc/profile</code></pre>
+<p>7.查看erlang是否安装成功</p>
+<pre><code class="shell">erl -version</code></pre>
+<h2 id="2-卸载erlang"><a href="#2-卸载erlang" class="headerlink" title="2. 卸载erlang"></a>2. 卸载erlang</h2><blockquote>
+<pre><code class="shell">yum list | grep erlang
+yum -y remove erlang-*
+yum remove erlang.x86_64
+rm -rf /usr/lib64/erlang</code></pre>
+</blockquote>
+<h2 id="3-安装RabbitMQ"><a href="#3-安装RabbitMQ" class="headerlink" title="3. 安装RabbitMQ"></a>3. 安装RabbitMQ</h2><p>1.下载安装包</p>
+<pre><code class="shell">wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.15/rabbitmq-server-generic-unix-3.7.15.tar.xz</code></pre>
+<p>2.解压</p>
+<pre><code class="shell">tar -xvf rabbitmq-server-generic-unix-3.7.15.tar.xz</code></pre>
+<p>3.查看当前路径</p>
+<pre><code class="shell">pwd</code></pre>
+<p>4.配置环境变量(pwd路径 + /rabbitmq_server-3.7.15/sbin)</p>
+<pre><code class="shell">echo &#39;export PATH=$PATH:/root/rabbitmq/rabbitmq_server-3.7.15/sbin&#39; &gt;&gt; /etc/profile</code></pre>
+<p>5.使环境变量配置文件生效</p>
+<pre><code class="shell">source /etc/profile</code></pre>
+<p>6.rabbitmq服务操作</p>
+<pre><code class="shell">#开启rabbitmq服务
+rabbitmq-server -detached
+#查看服务状态
+rabbitmqctl status
+#停止服务
+rabbitmqctl stop</code></pre>
+<p>7.开启rabbitmq应用</p>
+<pre><code class="shell">#开启
+rabbitmqctl start_app
+#关闭
+rabbitmqctl stop_app</code></pre>
+<p>8.开启web可视化插件(访问: http://<strong><em>IP</em></strong>:15672/)（默认账号密码均为guest【仅允许本机登录】）</p>
+<pre><code class="shell">#开启管理插件
+rabbitmq-plugins enable rabbitmq_management
+#查看插件集合
+rabbitmq-plugins list</code></pre>
+<p>![image-20210607155617357](centos 安装基本环境支持/image-20210607155617357.png)</p>
+<h2 id="4-RabbitMQ用户管理"><a href="#4-RabbitMQ用户管理" class="headerlink" title="4. RabbitMQ用户管理"></a>4. RabbitMQ用户管理</h2><blockquote>
+<p>查看所有用户</p>
+<pre><code class="shell">rabbitmqctl list_users</code></pre>
+<p>添加一个用户</p>
+<pre><code class="shell">rabbitmqctl add_user root 123456</code></pre>
+<p>配置权限</p>
+<pre><code class="shell">rabbitmqctl set_permissions -p &quot;/&quot; root &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</code></pre>
+<p>查看用权限</p>
+<pre><code class="shell">rabbitmqctl list_user_permissions root</code></pre>
+<p>设置tag</p>
+<pre><code class="shell">rabbitmqctl set_user_tags root administrator</code></pre>
+<p>删除用户（安全起见，删除默认用户）</p>
+<pre><code class="shell">rabbitmqctl delete_user guest</code></pre>
+</blockquote>
+<p>使用配置的账号密码登录即可：</p>
+<p>![image-20210607160801810](centos 安装基本环境支持/image-20210607160801810.png)</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qinghuaL/p/11597695.html">1. yum 安装卸载方式</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fengyumeng/p/11133924.html">2. CentOS7安装RabbitMQ</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cwp-bg/p/10070467.html">3.rabbitmq之后台管理和用户设置(三)</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 monk6658@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    学如逆水行舟，不进则退
+</p>
+<!--<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>-->
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
