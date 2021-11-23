@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>悲观锁与乐观锁 | 小明的博客</title>
+  <meta name="keywords" content=" 并发 , 锁机制 ">
+  <meta name="description" content="悲观锁与乐观锁 | 小明的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodeJs安装及周边安装">
+<meta property="og:url" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="小明的博客">
+<meta property="og:description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122112939663.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113240013.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122102114982.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113810731.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122114944012.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122115350566.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122131003183.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135729073.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135936555.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122140022885.png">
+<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122172338440.png">
+<meta property="article:published_time" content="2021-11-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-23T01:22:12.698Z">
+<meta property="article:author" content="小明同鞋">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="nodeJs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
+
+
+<link rel="icon" href="/img/head.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/head.jpg" />
+</a>
+<div class="author">
+    <span>小明同鞋</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/monk6658" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1245141646&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:monk6658@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="All">All<small>(23)</small></div></li>
+    
+        
+            
+            <li><div data-rel="工具">工具<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="并发">并发<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="并发、netty">并发、netty<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="小程序">小程序<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="中间件">中间件<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="docker">docker<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JAVA">JAVA<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JVM">JVM<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="oracle">oracle<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a  class="friends">Friends</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">原hexo主题博主</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>按位与</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>并发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>博客</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态规划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分包粘包</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>排序</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>哨兵</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>死锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁机制</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁netty</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>微信支付</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>位运算</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>小程序</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>异常</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>支付宝</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>中间件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>主从</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>centos</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cer</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Comparable</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Comparator</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Erlang</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>frp</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java调用c++方法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>jdk</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JNA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JvisualVm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JVM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nodeJs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oracle</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pfx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RabbitMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RSA分段</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag2</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag3</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All 工具 "
+           href="/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/"
+           data-tag="hexo,nodeJs"
+           data-author="" >
+            <span class="post-title" title="nodeJs安装及周边安装">nodeJs安装及周边安装</span>
+            <span class="post-date" title="2021-11-06 00:00:00">2021/11/06</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/06/17/java%E5%AD%A6%E4%B9%A0/jvm/NullPointerException%20%E6%B2%A1%E6%9C%89%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E6%A0%88%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA/"
+           data-tag="异常,JVM"
+           data-author="" >
+            <span class="post-title" title="NullPointerException 没有打印异常栈问题追踪">NullPointerException 没有打印异常栈问题追踪</span>
+            <span class="post-date" title="2021-06-17 14:16:33">2021/06/17</span>
+        </a>
+        
+        <a  class="All 中间件 "
+           href="/2021/06/05/%E4%B8%AD%E9%97%B4%E4%BB%B6/rabbitmq/RabbitMQ%E4%BD%BF%E7%94%A8/"
+           data-tag="中间件,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="RabbitMQ 实战">RabbitMQ 实战</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All docker "
+           href="/2021/06/05/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/linux/Docker%20%E5%A4%A7%E5%85%A8/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker大全">docker大全</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2021/06/05/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/linux/centos%20%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%94%AF%E6%8C%81/"
+           data-tag="RabbitMQ,jdk,Erlang,frp,centos"
+           data-author="" >
+            <span class="post-title" title="centos 安装基本环境支持">centos 安装基本环境支持</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/05/20/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/redis%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%93%A8%E5%85%B5/redis%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%8F%8A%E5%93%A8%E5%85%B5/"
+           data-tag="redis,主从,哨兵"
+           data-author="" >
+            <span class="post-title" title="redis搭建主从及哨兵">redis搭建主从及哨兵</span>
+            <span class="post-date" title="2021-05-20 14:16:33">2021/05/20</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/21/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2021-04-21 14:16:33">2021/04/21</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/19/java%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/"
+           data-tag="并发,java"
+           data-author="" >
+            <span class="post-title" title="并发编程实战">并发编程实战</span>
+            <span class="post-date" title="2021-04-19 00:00:00">2021/04/19</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
+           data-tag="动态规划,java"
+           data-author="" >
+            <span class="post-title" title="动态规划">动态规划</span>
+            <span class="post-date" title="2021-04-14 14:16:33">2021/04/14</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"
+           data-tag="java调用c++方法,JNA"
+           data-author="" >
+            <span class="post-title" title="JNA的使用">JNA的使用</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All JVM "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/JvisualVm%E6%8F%90%E7%A4%BA%E6%97%A0%E6%B3%95%E7%9B%91%E8%A7%86%E6%9C%AC%E5%9C%B0Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/"
+           data-tag="JVM,JvisualVm"
+           data-author="" >
+            <span class="post-title" title="JvisualVm提示无法监视本地Java应用程序解决办法">JvisualVm提示无法监视本地Java应用程序解决办法</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/RMI%20TCP%20CONNECTION%20%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/"
+           data-tag="java调用c++方法,JNA"
+           data-author="" >
+            <span class="post-title" title="JNA的使用">JNA的使用</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All 并发、netty "
+           href="/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/"
+           data-tag="锁netty,并发,分包粘包"
+           data-author="" >
+            <span class="post-title" title="netty分包粘包问题">netty分包粘包问题</span>
+            <span class="post-date" title="2021-03-30 14:16:33">2021/03/30</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/03/08/java%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/%E4%BD%8D%E8%BF%90%E7%AE%97/"
+           data-tag="按位与,位运算"
+           data-author="" >
+            <span class="post-title" title="位运算">位运算</span>
+            <span class="post-date" title="2021-03-08 14:16:33">2021/03/08</span>
+        </a>
+        
+        <a  class="All oracle "
+           href="/2020/12/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"
+           data-tag="sql,oracle,函数"
+           data-author="" >
+            <span class="post-title" title="oracle基础语法">oracle基础语法</span>
+            <span class="post-date" title="2020-12-17 00:00:00">2020/12/17</span>
+        </a>
+        
+        <a  class="All 并发 "
+           href="/2020/11/03/%E5%B9%B6%E5%8F%91/Java%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"
+           data-tag="并发,锁机制,死锁"
+           data-author="" >
+            <span class="post-title" title="Java 并发基础常见面试题总结">Java 并发基础常见面试题总结</span>
+            <span class="post-date" title="2020-11-03 14:16:33">2020/11/03</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/10/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/hexo/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"
+           data-tag="hexo,博客"
+           data-author="" >
+            <span class="post-title" title="hexo搭建静态博客">hexo搭建静态博客</span>
+            <span class="post-date" title="2020-10-28 14:16:33">2020/10/28</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/10/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/%E8%AF%81%E4%B9%A6/%E8%AF%81%E4%B9%A6%E8%BD%AC%E6%8D%A2/"
+           data-tag="pfx,cer"
+           data-author="" >
+            <span class="post-title" title="证书转换">证书转换</span>
+            <span class="post-date" title="2020-10-28 14:16:33">2020/10/28</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2020/10/27/java%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E5%85%B7%E5%8C%85%E5%AD%A6%E4%B9%A0/Comparable%E4%B8%8EComparator/"
+           data-tag="Comparable,Comparator,排序"
+           data-author="" >
+            <span class="post-title" title="Comparable与Comparator">Comparable与Comparator</span>
+            <span class="post-date" title="2020-10-27 14:16:33">2020/10/27</span>
+        </a>
+        
+        <a  class="All 小程序 "
+           href="/2020/10/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3/rsa%E5%88%86%E6%AE%B5%E5%8A%A0%E5%AF%86(%E5%B0%8F%E7%A8%8B%E5%BA%8F+java%E5%90%8E%E5%8F%B0)/"
+           data-tag="小程序,RSA分段"
+           data-author="" >
+            <span class="post-title" title="rsa分段加密（小程序+java后台）">rsa分段加密（小程序+java后台）</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All 并发 "
+           href="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/"
+           data-tag="并发,锁机制"
+           data-author="" >
+            <span class="post-title" title="悲观锁与乐观锁">悲观锁与乐观锁</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All oracle "
+           href="/2020/10/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/"
+           data-tag="运维,tag2,tag3"
+           data-author="" >
+            <span class="post-title" title="oracle 误删数据、表的恢复">oracle 误删数据、表的恢复</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/03/25/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/%E8%81%9A%E5%90%88%E6%94%AF%E4%BB%98%E6%8B%89%E8%B5%B7%E6%B5%81%E7%A8%8B/%E8%81%9A%E5%90%88%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B/"
+           data-tag="微信支付,支付宝"
+           data-author="" >
+            <span class="post-title" title="聚合支付">聚合支付</span>
+            <span class="post-date" title="2020-03-25 14:16:33">2020/03/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-并发/悲观锁与乐观锁" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">悲观锁与乐观锁</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="并发">并发</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">并发</a>
+            
+            <a class="color4">锁机制</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2021-11-06 11:02:08'>2020-10-21 14:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%82%B2%E8%A7%82%E9%94%81"><span class="toc-text">悲观锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%82%B2%E8%A7%82%E9%94%81%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 悲观锁定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A7%8D%E7%B1%BB"><span class="toc-text">2. 种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%B4%E6%98%8E"><span class="toc-text">3. 说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">4. 实现方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%90%E8%A7%82%E9%94%81"><span class="toc-text">乐观锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B9%90%E8%A7%82%E9%94%81%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 乐观锁定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">2. 两种实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-CAS-%E5%AE%9E%E7%8E%B0-compare-and-swap-%E6%AF%94%E8%BE%83%E4%B8%8E%E4%BA%A4%E6%8D%A2"><span class="toc-text">2.1 CAS 实现(compare and swap[比较与交换])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E7%89%88%E6%9C%AC%E5%8F%B7%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2 版本号机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-ABA-%E9%97%AE%E9%A2%98"><span class="toc-text">2.2.1 ABA 问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-text">2.2.2 版本号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-CAS%E4%B8%8Esynchronized%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E6%99%AF"><span class="toc-text">3. CAS与synchronized的使用情景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%A4%E8%80%85%E6%AF%94%E8%BE%83"><span class="toc-text">4. 两者比较</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h2><p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%82%B2%E8%A7%82%E9%94%81"><span class="toc-text">悲观锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%82%B2%E8%A7%82%E9%94%81%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 悲观锁定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%A7%8D%E7%B1%BB"><span class="toc-text">2. 种类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%AF%B4%E6%98%8E"><span class="toc-text">3. 说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">4. 实现方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%90%E8%A7%82%E9%94%81"><span class="toc-text">乐观锁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B9%90%E8%A7%82%E9%94%81%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 乐观锁定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%A4%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-text">2. 两种实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-CAS-%E5%AE%9E%E7%8E%B0-compare-and-swap-%E6%AF%94%E8%BE%83%E4%B8%8E%E4%BA%A4%E6%8D%A2"><span class="toc-text">2.1 CAS 实现(compare and swap[比较与交换])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E7%89%88%E6%9C%AC%E5%8F%B7%E6%9C%BA%E5%88%B6"><span class="toc-text">2.2 版本号机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-1-ABA-%E9%97%AE%E9%A2%98"><span class="toc-text">2.2.1 ABA 问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-2-%E7%89%88%E6%9C%AC%E5%8F%B7"><span class="toc-text">2.2.2 版本号</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-CAS%E4%B8%8Esynchronized%E7%9A%84%E4%BD%BF%E7%94%A8%E6%83%85%E6%99%AF"><span class="toc-text">3. CAS与synchronized的使用情景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%B8%A4%E8%80%85%E6%AF%94%E8%BE%83"><span class="toc-text">4. 两者比较</span></a></li></ol></li></ol></div></p>
+<h3 id="1-悲观锁定义"><a href="#1-悲观锁定义" class="headerlink" title="1. 悲观锁定义"></a>1. 悲观锁定义</h3><p>在修改数据之前先锁定，再修改的方式被称之为悲观并发控制【Pessimistic Concurrency Control，缩写“PCC”，又名“悲观锁”】。</p>
+<p><strong>共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程。</strong></p>
+<p>悲观锁，具有强烈的独占和排他特性。传统的关系型数据库里边就用到了很多这种锁机制，比如行锁，表锁等，读锁，写锁等，都是在做操作之前先上锁。Java中<code>synchronized</code>和<code>ReentrantLock</code>等独占锁就是悲观锁思想的实现。</p>
+<h3 id="2-种类"><a href="#2-种类" class="headerlink" title="2. 种类"></a>2. 种类</h3><ol>
+<li><font color="red"> 共享锁【shared locks】又称为读锁，简称S锁。</font>多个事务对于同一数据可以共享一把锁，都能访问到数据，但是只能读不能修改。</li>
+<li><font color="red"> 排他锁【exclusive locks】又称为写锁，简称X锁。</font>排他锁就是不能与其他锁（共享锁、排他锁）并存，获取排他锁的事务是可以对数据行读取和修改。</li>
+</ol>
+<h3 id="3-说明"><a href="#3-说明" class="headerlink" title="3. 说明"></a>3. 说明</h3><p>悲观并发控制实际上是“先取锁再访问”的保守策略。</p>
+<ul>
+<li><strong>处理加锁的机制会让数据库产生额外的开销，增加产生死锁的机会</strong></li>
+<li><em><strong>降低并行性</strong></em>（一个事务如果锁定了某行数据，其他事务就必须等待该事务处理完才可以处理那行数据。）</li>
+</ul>
+<h3 id="4-实现方式"><a href="#4-实现方式" class="headerlink" title="4. 实现方式"></a>4. 实现方式</h3><ol>
+<li><p>修改之前，先加上排它锁(exclusive locks)</p>
+</li>
+<li><p>加锁失败，说明该记录正在修改，线程陷入等待或者抛出异常</p>
+</li>
+<li><p>加锁成功，修改，事务结束之后解锁</p>
+<p><img src="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/1.jpg"></p>
+</li>
+</ol>
+<p>[^ ]:注：mysql设置非立马提交（set autocommit=0）MySQL InnoDB 默认行级锁。行级锁都是基于索引的，如果一条 SQL 语句用不到索引是不会使用行级锁的，会使用表级锁把整张表锁住。</p>
+<h2 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h2><h3 id="1-乐观锁定义"><a href="#1-乐观锁定义" class="headerlink" title="1. 乐观锁定义"></a>1. 乐观锁定义</h3><p><strong>乐观锁一般会使用版本号机制或CAS算法实现。</strong>乐观锁适用于多读的应用类型，这样可以提高吞吐量<strong>，像数据库提供的类似于write_condition机制</strong>，其实都是提供的乐观锁。在Java中<code>java.util.concurrent.atomic</code>包下面的原子变量类就是使用了乐观锁的一种实现方式<strong>CAS</strong>实现的。</p>
+<h3 id="2-两种实现方式"><a href="#2-两种实现方式" class="headerlink" title="2. 两种实现方式"></a>2. 两种实现方式</h3><h4 id="2-1-CAS-实现-compare-and-swap-比较与交换"><a href="#2-1-CAS-实现-compare-and-swap-比较与交换" class="headerlink" title="2.1 CAS 实现(compare and swap[比较与交换])"></a>2.1 <strong>CAS 实现</strong>(compare and swap[比较与交换])</h4><p>Java 中java.util.concurrent.atomic包下面的原子变量使用了乐观锁的一种 CAS 实现方式。多个线程尝试使用 CAS 同时更新同一个变量时，只有其中一个线程能更新变量的值，而其它线程都失败，失败的线程并不会被挂起，而是被告知这次竞争中失败，并可以再次尝试。</p>
+<p><img src="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/2.jpg" alt="img"></p>
+<h4 id="2-2-版本号机制"><a href="#2-2-版本号机制" class="headerlink" title="2.2 版本号机制"></a>2.2 版本号机制</h4><h5 id="2-2-1-ABA-问题"><a href="#2-2-1-ABA-问题" class="headerlink" title="2.2.1 ABA 问题"></a>2.2.1 ABA 问题</h5><p><img src="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/3.png"></p>
+<p>如图流程可以看出，当线程一读取变量v=1，这时线程二读取的变量v=1，并且线程二对变量v=1 进行了修改操作。使v=2，之后又使v=1。这时，线程一进行了CAS操作，发现变量v=1,这时线程一也成功了，但是过程是存在ABA问题的。</p>
+<h5 id="2-2-2-版本号"><a href="#2-2-2-版本号" class="headerlink" title="2.2.2 版本号"></a>2.2.2 版本号</h5><p>乐观锁每次操作时都带上一个版本号，一旦版本号和数据的版本号一致就可以执行修改操作并对版本号执行+1操作，否则就执行失败。因为每次操作的版本号都会随之增加，所以不会出现 ABA 问题，因为版本号只会增加不会减少。除了 version 以外，还可以使用时间戳，因为时间戳天然具有顺序递增性。</p>
+<h3 id="3-CAS与synchronized的使用情景"><a href="#3-CAS与synchronized的使用情景" class="headerlink" title="3. CAS与synchronized的使用情景"></a>3. <strong>CAS与synchronized的使用情景</strong></h3><blockquote>
+<p><strong>简单的来说CAS适用于写比较少的情况下（多读场景，冲突一般较少），synchronized适用于写比较多的情况下（多写场景，冲突一般较多）</strong></p>
+</blockquote>
+<ol>
+<li>对于资源竞争较少（线程冲突较轻）的情况，使用<code>synchronized</code>同步锁进行线程阻塞和唤醒切换以及用户态内核态间的切换操作额外浪费消耗cpu资源；而CAS基于硬件实现，不需要进入内核，不需要切换线程，操作自旋几率较少，因此可以获得更高的性能。</li>
+<li>对于资源竞争严重（线程冲突严重）的情况，CAS自旋的概率会比较大，从而浪费更多的CPU资源，效率低于synchronized。</li>
+</ol>
+<p>补充： Java并发编程这个领域中<code>synchronized</code>关键字一直都是元老级的角色，很久之前很多人都会称它为 <strong>“重量级锁”</strong> 。但是，在JavaSE 1.6之后进行了主要包括为了减少获得锁和释放锁带来的性能消耗而引入的 <strong>偏向锁</strong> 和 <strong>轻量级锁</strong> 以及其它<strong>各种优化</strong>之后变得在某些情况下并不是那么重了。<code>synchronized</code>的底层实现主要依靠 <strong>Lock-Free</strong> 的队列，基本思路是 <strong>自旋后阻塞</strong>，<strong>竞争切换后继续竞争锁</strong>，<strong>稍微牺牲了公平性，但获得了高吞吐量</strong>。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。</p>
+<h3 id="4-两者比较"><a href="#4-两者比较" class="headerlink" title="4. 两者比较"></a>4. 两者比较</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>乐观锁</th>
+<th>悲观锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>适用场景</td>
+<td><strong>适用于写比较少的情况下（多读场景）</strong></td>
+<td><strong>多写的场景下用悲观锁就比较合适</strong></td>
+</tr>
+<tr>
+<td>实现</td>
+<td>1. CAS<br> 2. 版本号机制</td>
+<td>1. 传统的关系型数据库的行锁，表锁等，读锁，写锁等<br>2. <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c8f997e7f75c">synchronized</a> 关键字</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>1. ABA问题<br>2. 循环时间长开销大（自旋CAS（也就是不成功就一直循环执行直到成功））<br>3. 只能保证一个共享变量的原子操作</td>
+<td>1.效率低<br>2.容易产生死锁</td>
+</tr>
+</tbody></table>
+<p>- <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d2ac26ca6525">什么是乐观锁，什么是悲观锁</a></p>
+<p>- <a target="_blank" rel="noopener" href="https://snailclimb.gitee.io/javaguide/#/docs/essential-content-for-interview/%E9%9D%A2%E8%AF%95%E5%BF%85%E5%A4%87%E4%B9%8B%E4%B9%90%E8%A7%82%E9%94%81%E4%B8%8E%E6%82%B2%E8%A7%82%E9%94%81?id=_1-%e7%89%88%e6%9c%ac%e5%8f%b7%e6%9c%ba%e5%88%b6">何谓悲观锁与乐观锁</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 monk6658@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    学如逆水行舟，不进则退
+</p>
+<!--<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>-->
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
