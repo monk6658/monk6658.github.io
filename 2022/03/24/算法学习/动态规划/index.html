@@ -2,36 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>动态规划 | 小明的博客</title>
-  <meta name="keywords" content=" 动态规划 , java ">
-  <meta name="description" content="动态规划 | 小明的博客">
+  <title>算法学习 | 小明的博客</title>
+  <meta name="keywords" content=" 算法 , java ">
+  <meta name="description" content="算法学习 | 小明的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta name="description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodeJs安装及周边安装">
-<meta property="og:url" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="JMH使用指南">
+<meta property="og:url" content="https://monk6658.github.io/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="小明的博客">
-<meta property="og:description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta property="og:description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122112939663.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113240013.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122102114982.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113810731.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122114944012.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122115350566.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122131003183.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135729073.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135936555.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122140022885.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122172338440.png">
-<meta property="article:published_time" content="2021-11-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-23T01:22:12.698Z">
+<meta property="article:published_time" content="2022-09-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-14T09:30:46.624Z">
 <meta property="article:author" content="小明同鞋">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="nodeJs">
+<meta property="article:tag" content="基准测试工具">
+<meta property="article:tag" content="JMH">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
 
 
 <link rel="icon" href="/img/head.jpg">
@@ -118,11 +105,11 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(23)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(27)</small></div></li>
     
         
             
-            <li><div data-rel="工具">工具<small>(5)</small></div>
+            <li><div data-rel="工具">工具<small>(7)</small></div>
                 
             </li>
             
@@ -178,7 +165,7 @@
     
         
             
-            <li><div data-rel="JAVA">JAVA<small>(7)</small></div>
+            <li><div data-rel="JAVA">JAVA<small>(8)</small></div>
                 
             </li>
             
@@ -202,6 +189,14 @@
     
         
             
+            <li><div data-rel="mysql">mysql<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="oracle">oracle<small>(2)</small></div>
                 
             </li>
@@ -218,7 +213,7 @@
     </div>
     <div><a  class="friends">Friends</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="23">
+<input type="hidden" id="yelog_site_posts_number" value="27">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -277,15 +272,15 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>动态规划</a>
-            </li>
-        
-            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>分包粘包</a>
             </li>
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>基准测试工具</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -302,6 +297,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>死锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -369,6 +368,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>FinalAgent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>frp</a>
             </li>
         
@@ -389,6 +392,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JMH</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>JNA</a>
             </li>
         
@@ -401,7 +408,19 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mongodb</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>nodeJs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nosql</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -410,6 +429,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>pfx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pycharm</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -443,6 +466,46 @@
     
     <nav id="title-list-nav">
         
+        <a  class="All JAVA "
+           href="/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"
+           data-tag="基准测试工具,JMH"
+           data-author="" >
+            <span class="post-title" title="JMH使用指南">JMH使用指南</span>
+            <span class="post-date" title="2022-09-13 00:00:00">2022/09/13</span>
+        </a>
+        
+        <a  class="All mysql "
+           href="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/"
+           data-tag="sql,mysql,函数"
+           data-author="" >
+            <span class="post-title" title="mysql操作">mysql操作</span>
+            <span class="post-date" title="2022-06-10 00:00:00">2022/06/10</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2022/05/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/ide%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/pycharm2021.3/"
+           data-tag="pycharm,FinalAgent"
+           data-author="" >
+            <span class="post-title" title="pycharm 安装及破解">pycharm 安装及破解</span>
+            <span class="post-date" title="2022-05-28 14:16:33">2022/05/28</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2022/03/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
+           data-tag="算法,java"
+           data-author="" >
+            <span class="post-title" title="算法学习">算法学习</span>
+            <span class="post-date" title="2022-03-24 14:16:33">2022/03/24</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/11/24/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/mongodb/mongodb%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AD%A6%E4%B9%A0/"
+           data-tag="mongodb,nosql"
+           data-author="" >
+            <span class="post-title" title="mongodb安装及学习">mongodb安装及学习</span>
+            <span class="post-date" title="2021-11-24 00:00:00">2021/11/24</span>
+        </a>
+        
         <a  class="All 工具 "
            href="/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/"
            data-tag="hexo,nodeJs"
@@ -453,7 +516,7 @@
         
         <a  class="All JAVA "
            href="/2021/06/17/java%E5%AD%A6%E4%B9%A0/jvm/NullPointerException%20%E6%B2%A1%E6%9C%89%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E6%A0%88%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA/"
-           data-tag="异常,JVM"
+           data-tag="JVM,异常"
            data-author="" >
             <span class="post-title" title="NullPointerException 没有打印异常栈问题追踪">NullPointerException 没有打印异常栈问题追踪</span>
             <span class="post-date" title="2021-06-17 14:16:33">2021/06/17</span>
@@ -507,14 +570,6 @@
             <span class="post-date" title="2021-04-19 00:00:00">2021/04/19</span>
         </a>
         
-        <a  class="All 算法 "
-           href="/2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
-           data-tag="动态规划,java"
-           data-author="" >
-            <span class="post-title" title="动态规划">动态规划</span>
-            <span class="post-date" title="2021-04-14 14:16:33">2021/04/14</span>
-        </a>
-        
         <a  class="All JAVA "
            href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"
            data-tag="java调用c++方法,JNA"
@@ -525,7 +580,7 @@
         
         <a  class="All JVM "
            href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/JvisualVm%E6%8F%90%E7%A4%BA%E6%97%A0%E6%B3%95%E7%9B%91%E8%A7%86%E6%9C%AC%E5%9C%B0Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/"
-           data-tag="JVM,JvisualVm"
+           data-tag="JvisualVm,JVM"
            data-author="" >
             <span class="post-title" title="JvisualVm提示无法监视本地Java应用程序解决办法">JvisualVm提示无法监视本地Java应用程序解决办法</span>
             <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
@@ -557,7 +612,7 @@
         
         <a  class="All oracle "
            href="/2020/12/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"
-           data-tag="sql,oracle,函数"
+           data-tag="sql,函数,oracle"
            data-author="" >
             <span class="post-title" title="oracle基础语法">oracle基础语法</span>
             <span class="post-date" title="2020-12-17 00:00:00">2020/12/17</span>
@@ -646,7 +701,7 @@
     <div class="pjax">
         <article id="post-算法学习/动态规划" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">动态规划</h1>
+        <h1 class="article-title">算法学习</h1>
     
     <div class="article-meta">
         
@@ -664,7 +719,7 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color5">动态规划</a>
+            <a class="color3">算法</a>
             
             <a class="color5">java</a>
             
@@ -673,7 +728,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-11-06 11:02:08'>2021-04-14 14:16</time>
+            Created At : <time class="date" title='Updated At: 2022-09-13 16:18:36'>2022-03-24 14:16</time>
         
     </div>
     <div class="article-meta">
@@ -695,7 +750,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95"><span class="toc-text">动态规划算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%89%B9%E7%82%B9"><span class="toc-text">动态规划特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-text">解题步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%A1%AE%E5%AE%9A%E7%8A%B6%E6%80%81"><span class="toc-text">1. 确定状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%A4%A7%E5%85%A8"><span class="toc-text">算法大全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95"><span class="toc-text">1. 动态规划算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9F"><span class="toc-text">1.1 什么是动态规划？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E4%B8%89%E4%B8%AA%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 动态规划的三个特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-text">1.3 动态规划解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A"><span class="toc-text">1.4 动态规划术语解释</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E9%A2%98"><span class="toc-text">算法题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">1. 动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98"><span class="toc-text">11. 青蛙跳台阶问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-%E9%A2%98%E7%9B%AE"><span class="toc-text">1.1.1 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-%E7%A4%BA%E4%BE%8B"><span class="toc-text">1.1.2 示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-text">1.1.3 解题思路</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%89%B9%E7%82%B9"><span class="toc-text">动态规划特点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -711,8 +766,73 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95"><span class="toc-text">动态规划算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%89%B9%E7%82%B9"><span class="toc-text">动态规划特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-text">解题步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%A1%AE%E5%AE%9A%E7%8A%B6%E6%80%81"><span class="toc-text">1. 确定状态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol></div></p>
-<h1 id="动态规划算法"><a href="#动态规划算法" class="headerlink" title="动态规划算法"></a>动态规划算法</h1><h2 id="动态规划特点"><a href="#动态规划特点" class="headerlink" title="动态规划特点"></a>动态规划特点</h2><ol>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%A4%A7%E5%85%A8"><span class="toc-text">算法大全</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AE%97%E6%B3%95"><span class="toc-text">1. 动态规划算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%9F"><span class="toc-text">1.1 什么是动态规划？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E4%B8%89%E4%B8%AA%E7%89%B9%E6%80%A7"><span class="toc-text">1.2 动态规划的三个特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-text">1.3 动态规划解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E6%9C%AF%E8%AF%AD%E8%A7%A3%E9%87%8A"><span class="toc-text">1.4 动态规划术语解释</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E9%A2%98"><span class="toc-text">算法题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">1. 动态规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98"><span class="toc-text">11. 青蛙跳台阶问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-1-%E9%A2%98%E7%9B%AE"><span class="toc-text">1.1.1 题目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-2-%E7%A4%BA%E4%BE%8B"><span class="toc-text">1.1.2 示例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-3-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-text">1.1.3 解题思路</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%89%B9%E7%82%B9"><span class="toc-text">动态规划特点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></div></p>
+<h1 id="算法大全"><a href="#算法大全" class="headerlink" title="算法大全"></a>算法大全</h1><p>算法是程序得灵魂。</p>
+<h2 id="1-动态规划算法"><a href="#1-动态规划算法" class="headerlink" title="1. 动态规划算法"></a>1. 动态规划算法</h2><h3 id="1-1-什么是动态规划？"><a href="#1-1-什么是动态规划？" class="headerlink" title="1.1 什么是动态规划？"></a>1.1 什么是动态规划？</h3><p>动态规划（英语：Dynamic programming，简称 DP）是运筹学的一个分支，是求解决策过程（decision process）最优化的数学方法。把一个大问题划分成无数个小问题，且后置位问题的解决方案依据前置位解决方案，从而求出一条最优解决方案链条。</p>
+<h3 id="1-2-动态规划的三个特性"><a href="#1-2-动态规划的三个特性" class="headerlink" title="1.2 动态规划的三个特性"></a>1.2 动态规划的三个特性</h3><ul>
+<li><strong>最优化原理</strong>：如果问题的最优解所包含的子问题的解也是最优的，就称该问题具有最优子结构，即满足最优化原理。</li>
+<li><strong>无后效性</strong>：即某阶段状态一旦确定，就不受这个状态以后决策的影响。也就是说，某状态以后的过程不会影响以前的状态，只与当前状态有关。</li>
+<li><strong>有重叠子问题</strong>：即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。（该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势）</li>
+</ul>
+<h3 id="1-3-动态规划解题思路"><a href="#1-3-动态规划解题思路" class="headerlink" title="1.3 动态规划解题思路"></a>1.3 动态规划解题思路</h3><ol>
+<li><p><strong>拆分子问题</strong>：把问题拆分成若干子问题</p>
+</li>
+<li><p><strong>确定状态和状态变量</strong>：确定每个子问题的解</p>
+</li>
+<li><p><strong>确定决策并写出状态转移方程</strong>：依据每一个子问题的解，写出解变更的规则公式</p>
+</li>
+<li><p><strong>寻找边界条件</strong>：给出状态转移方程的终止条件。</p>
+</li>
+</ol>
+<h3 id="1-4-动态规划术语解释"><a href="#1-4-动态规划术语解释" class="headerlink" title="1.4 动态规划术语解释"></a>1.4 动态规划术语解释</h3><p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%98%B6%E6%AE%B5">阶段</a>：把所给求解问题的过程恰当地分成若干个相互联系的阶段，以便于求解，过程不同，阶段数就可能不同．描述阶段的变量称为阶段变量。在多数情况下，阶段变量是离散的，用k表示。此外，也有阶段变量是连续的情形。如果过程可以在任何时刻作出决策，且在任意两个不同的时刻之间允许有无穷多个决策时，阶段变量就是连续的  。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%8A%B6%E6%80%81">状态</a>：状态表示每个阶段开始面临的自然状况或客观条件，它不以人们的主观意志为转移，也称为不可控因素。在上面的例子中状态就是某阶段的出发位置，它既是该阶段某路的起点，同时又是前一阶段某支路的终点 。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%A0%E5%90%8E%E6%95%88%E6%80%A7">无后效性</a>：我们要求状态具有下面的性质：如果给定某一阶段的状态，则在这一阶段以后过程的发展不受这阶段以前各段状态的影响，所有各阶段都确定时，整个过程也就确定了。换句话说，过程的每一次实现可以用一个状态序列表示，在前面的例子中每阶段的状态是该线路的始点，确定了这些点的序列，整个线路也就完全确定。从某一阶段以后的线路开始，当这段的始点给定时，不受以前线路（所通过的点）的影响。状态的这个性质意味着过程的历史只能通过当前的状态去影响它的未来的发展，这个性质称为无后效性 。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%B3%E7%AD%96">决策</a>：一个阶段的状态给定以后，从该状态演变到下一阶段某个状态的一种选择（行动）称为决策。在最优控制中，也称为控制。在许多问题中，决策可以自然而然地表示为一个数或一组数。不同的决策对应着不同的数值。描述决策的变量称<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%86%B3%E7%AD%96%E5%8F%98%E9%87%8F">决策变量</a>，因状态满足无后效性，故在每个阶段选择决策时只需考虑当前的状态而无须考虑过程的历史  。</p>
+<p>决策变量的范围称为允许决策集合 。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%AD%96%E7%95%A5">策略</a>：由每个阶段的决策组成的序列称为策略。对于每一个实际的多阶段决策过程，可供选取的策略有一定的范围限制，这个范围称为允许策略集合 。</p>
+<h1 id="算法题"><a href="#算法题" class="headerlink" title="算法题"></a>算法题</h1><h2 id="1-动态规划"><a href="#1-动态规划" class="headerlink" title="1. 动态规划"></a>1. 动态规划</h2><h3 id="11-青蛙跳台阶问题"><a href="#11-青蛙跳台阶问题" class="headerlink" title="11. 青蛙跳台阶问题"></a>11. <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/">青蛙跳台阶问题</a></h3><h4 id="1-1-1-题目"><a href="#1-1-1-题目" class="headerlink" title="1.1.1 题目"></a>1.1.1 题目</h4><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。</p>
+<p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p>
+<h4 id="1-1-2-示例"><a href="#1-1-2-示例" class="headerlink" title="1.1.2 示例"></a>1.1.2 示例</h4><p>示例 1：<br>                输入：n = 2<br>                输出：2</p>
+<p>示例 2：<br>                输入：n = 7<br>                输出：21</p>
+<p>示例 3：<br>                输入：n = 0<br>                输出：1</p>
+<p>​                </p>
+<h4 id="1-1-3-解题思路"><a href="#1-1-3-解题思路" class="headerlink" title="1.1.3 解题思路"></a>1.1.3 解题思路</h4><p>以台阶为7级，举例计算</p>
+<ol>
+<li>划分阶段： 7级台阶分成跳到每一台阶所需要的跳法次数</li>
+<li>确定状态变量：把每一阶需要的跳法次数罗列出来。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>台阶个数</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th align="left">6</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>跳法次数</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+<td align="left">13</td>
+<td>21</td>
+</tr>
+</tbody></table>
+<ol start="3">
+<li>确定边界条件：当台阶 &lt;=1 的时候，台阶跳法为 1</li>
+<li>确定状态转移方程如下</li>
+</ol>
+<p>$$<br>f(x) = \begin{cases} 1, &amp; \text {x &lt;= 1} \ f(x-1)+f(x-2), &amp; \text{x &gt; 1} \end{cases}<br>$$</p>
+<h2 id="动态规划特点"><a href="#动态规划特点" class="headerlink" title="动态规划特点"></a>动态规划特点</h2><ol>
 <li>计数<ol>
 <li>有多少种方式走到右下角</li>
 <li>有多少种方法选出k个数，使得和为sum</li>
@@ -729,11 +849,9 @@
 </ol>
 </li>
 </ol>
-<h2 id="解题步骤"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤</h2><h3 id="1-确定状态"><a href="#1-确定状态" class="headerlink" title="1. 确定状态"></a>1. 确定状态</h3><ol>
-<li>确定状态</li>
-<li></li>
-</ol>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>- <a target="_blank" rel="noopener" href="https://www.cnblogs.com/roamman/archive/2010/08/17/1801392.html">位运算 之（1） 按位与（AND）&amp; 操作</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>- <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/126361983">第9章 动态规划</a></p>
+<p>- <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/529408">百度百科—动态规划</a></p>
+<p>- <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1817113">看一遍就理解：动态规划详解</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 monk6658@163.com </span>

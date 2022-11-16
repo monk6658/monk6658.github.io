@@ -6,32 +6,19 @@
   <meta name="keywords" content=" RabbitMQ , jdk , Erlang , frp , centos ">
   <meta name="description" content="centos 安装基本环境支持 | 小明的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta name="description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodeJs安装及周边安装">
-<meta property="og:url" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="JMH使用指南">
+<meta property="og:url" content="https://monk6658.github.io/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="小明的博客">
-<meta property="og:description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta property="og:description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122112939663.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113240013.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122102114982.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113810731.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122114944012.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122115350566.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122131003183.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135729073.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135936555.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122140022885.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122172338440.png">
-<meta property="article:published_time" content="2021-11-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-23T01:22:12.698Z">
+<meta property="article:published_time" content="2022-09-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-14T09:30:46.624Z">
 <meta property="article:author" content="小明同鞋">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="nodeJs">
+<meta property="article:tag" content="基准测试工具">
+<meta property="article:tag" content="JMH">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
 
 
 <link rel="icon" href="/img/head.jpg">
@@ -118,11 +105,11 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(23)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(27)</small></div></li>
     
         
             
-            <li><div data-rel="工具">工具<small>(5)</small></div>
+            <li><div data-rel="工具">工具<small>(7)</small></div>
                 
             </li>
             
@@ -178,7 +165,7 @@
     
         
             
-            <li><div data-rel="JAVA">JAVA<small>(7)</small></div>
+            <li><div data-rel="JAVA">JAVA<small>(8)</small></div>
                 
             </li>
             
@@ -202,6 +189,14 @@
     
         
             
+            <li><div data-rel="mysql">mysql<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="oracle">oracle<small>(2)</small></div>
                 
             </li>
@@ -218,7 +213,7 @@
     </div>
     <div><a  class="friends">Friends</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="23">
+<input type="hidden" id="yelog_site_posts_number" value="27">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -277,15 +272,15 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>动态规划</a>
-            </li>
-        
-            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>分包粘包</a>
             </li>
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>基准测试工具</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -302,6 +297,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>死锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -369,6 +368,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>FinalAgent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>frp</a>
             </li>
         
@@ -389,6 +392,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JMH</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>JNA</a>
             </li>
         
@@ -401,7 +408,19 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mongodb</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>nodeJs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nosql</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -410,6 +429,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>pfx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pycharm</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -443,6 +466,46 @@
     
     <nav id="title-list-nav">
         
+        <a  class="All JAVA "
+           href="/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"
+           data-tag="基准测试工具,JMH"
+           data-author="" >
+            <span class="post-title" title="JMH使用指南">JMH使用指南</span>
+            <span class="post-date" title="2022-09-13 00:00:00">2022/09/13</span>
+        </a>
+        
+        <a  class="All mysql "
+           href="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/"
+           data-tag="sql,mysql,函数"
+           data-author="" >
+            <span class="post-title" title="mysql操作">mysql操作</span>
+            <span class="post-date" title="2022-06-10 00:00:00">2022/06/10</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2022/05/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/ide%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/pycharm2021.3/"
+           data-tag="pycharm,FinalAgent"
+           data-author="" >
+            <span class="post-title" title="pycharm 安装及破解">pycharm 安装及破解</span>
+            <span class="post-date" title="2022-05-28 14:16:33">2022/05/28</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2022/03/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
+           data-tag="算法,java"
+           data-author="" >
+            <span class="post-title" title="算法学习">算法学习</span>
+            <span class="post-date" title="2022-03-24 14:16:33">2022/03/24</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/11/24/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/mongodb/mongodb%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AD%A6%E4%B9%A0/"
+           data-tag="mongodb,nosql"
+           data-author="" >
+            <span class="post-title" title="mongodb安装及学习">mongodb安装及学习</span>
+            <span class="post-date" title="2021-11-24 00:00:00">2021/11/24</span>
+        </a>
+        
         <a  class="All 工具 "
            href="/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/"
            data-tag="hexo,nodeJs"
@@ -453,7 +516,7 @@
         
         <a  class="All JAVA "
            href="/2021/06/17/java%E5%AD%A6%E4%B9%A0/jvm/NullPointerException%20%E6%B2%A1%E6%9C%89%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E6%A0%88%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA/"
-           data-tag="异常,JVM"
+           data-tag="JVM,异常"
            data-author="" >
             <span class="post-title" title="NullPointerException 没有打印异常栈问题追踪">NullPointerException 没有打印异常栈问题追踪</span>
             <span class="post-date" title="2021-06-17 14:16:33">2021/06/17</span>
@@ -507,14 +570,6 @@
             <span class="post-date" title="2021-04-19 00:00:00">2021/04/19</span>
         </a>
         
-        <a  class="All 算法 "
-           href="/2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
-           data-tag="动态规划,java"
-           data-author="" >
-            <span class="post-title" title="动态规划">动态规划</span>
-            <span class="post-date" title="2021-04-14 14:16:33">2021/04/14</span>
-        </a>
-        
         <a  class="All JAVA "
            href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"
            data-tag="java调用c++方法,JNA"
@@ -525,7 +580,7 @@
         
         <a  class="All JVM "
            href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/JvisualVm%E6%8F%90%E7%A4%BA%E6%97%A0%E6%B3%95%E7%9B%91%E8%A7%86%E6%9C%AC%E5%9C%B0Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/"
-           data-tag="JVM,JvisualVm"
+           data-tag="JvisualVm,JVM"
            data-author="" >
             <span class="post-title" title="JvisualVm提示无法监视本地Java应用程序解决办法">JvisualVm提示无法监视本地Java应用程序解决办法</span>
             <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
@@ -557,7 +612,7 @@
         
         <a  class="All oracle "
            href="/2020/12/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"
-           data-tag="sql,oracle,函数"
+           data-tag="sql,函数,oracle"
            data-author="" >
             <span class="post-title" title="oracle基础语法">oracle基础语法</span>
             <span class="post-date" title="2020-12-17 00:00:00">2020/12/17</span>
@@ -679,7 +734,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-11-06 11:02:08'>2021-06-05 14:16</time>
+            Created At : <time class="date" title='Updated At: 2022-11-16 16:40:52'>2021-06-05 14:16</time>
         
     </div>
     <div class="article-meta">
@@ -701,7 +756,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">一、安装 frp 内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">1. 服务端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">2. 客户端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F"><span class="toc-text">3. 注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E5%8F%8A%E5%8D%B8%E8%BD%BD-jdk"><span class="toc-text">二、安装及卸载 jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85jdk"><span class="toc-text">1. 安装jdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDjdk"><span class="toc-text">2. 卸载jdk</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">三、安装RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Erlang"><span class="toc-text">1. 安装Erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDerlang"><span class="toc-text">2. 卸载erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">3. 安装RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-RabbitMQ%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">4. RabbitMQ用户管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85docker"><span class="toc-text">四、安装docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 安装环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="toc-text">2. 离线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E4%B8%80%E9%94%AE%E6%8C%87%E4%BB%A4"><span class="toc-text">3. 离线安装一键指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="toc-text">4. 配置镜像加速</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">一、安装 frp 内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">1. 服务端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">2. 客户端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F"><span class="toc-text">3. 注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E5%8F%8A%E5%8D%B8%E8%BD%BD-jdk"><span class="toc-text">二、安装及卸载 jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85jdk"><span class="toc-text">1. 安装jdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDjdk"><span class="toc-text">2. 卸载jdk</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">三、安装RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Erlang"><span class="toc-text">1. 安装Erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDerlang"><span class="toc-text">2. 卸载erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">3. 安装RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-RabbitMQ%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">4. RabbitMQ用户管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85docker"><span class="toc-text">四、安装docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 安装环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="toc-text">2. 离线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E4%B8%80%E9%94%AE%E6%8C%87%E4%BB%A4"><span class="toc-text">3. 离线安装一键指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="toc-text">4. 配置镜像加速</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%89%E8%A3%85ngnix"><span class="toc-text">五、安装ngnix</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-text">1. 安装依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85"><span class="toc-text">2. 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3. 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-text">4. 基础命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">4. 常见问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%89%E8%A3%85mysql"><span class="toc-text">六、安装mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85telnet"><span class="toc-text">1. 安装telnet</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -717,7 +772,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">一、安装 frp 内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">1. 服务端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">2. 客户端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F"><span class="toc-text">3. 注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E5%8F%8A%E5%8D%B8%E8%BD%BD-jdk"><span class="toc-text">二、安装及卸载 jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85jdk"><span class="toc-text">1. 安装jdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDjdk"><span class="toc-text">2. 卸载jdk</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">三、安装RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Erlang"><span class="toc-text">1. 安装Erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDerlang"><span class="toc-text">2. 卸载erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">3. 安装RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-RabbitMQ%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">4. RabbitMQ用户管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85docker"><span class="toc-text">四、安装docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 安装环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="toc-text">2. 离线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E4%B8%80%E9%94%AE%E6%8C%87%E4%BB%A4"><span class="toc-text">3. 离线安装一键指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="toc-text">4. 配置镜像加速</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div></p>
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85-frp-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="toc-text">一、安装 frp 内网穿透</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">1. 服务端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">2. 客户端配置步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B3%A8%E6%84%8F"><span class="toc-text">3. 注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%89%E8%A3%85%E5%8F%8A%E5%8D%B8%E8%BD%BD-jdk"><span class="toc-text">二、安装及卸载 jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85jdk"><span class="toc-text">1. 安装jdk</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDjdk"><span class="toc-text">2. 卸载jdk</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">三、安装RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85Erlang"><span class="toc-text">1. 安装Erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%8D%B8%E8%BD%BDerlang"><span class="toc-text">2. 卸载erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85RabbitMQ"><span class="toc-text">3. 安装RabbitMQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-RabbitMQ%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">4. RabbitMQ用户管理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85docker"><span class="toc-text">四、安装docker</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="toc-text">1. 安装环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85"><span class="toc-text">2. 离线安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E4%B8%80%E9%94%AE%E6%8C%87%E4%BB%A4"><span class="toc-text">3. 离线安装一键指令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%85%8D%E7%BD%AE%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="toc-text">4. 配置镜像加速</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%89%E8%A3%85ngnix"><span class="toc-text">五、安装ngnix</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-text">1. 安装依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85"><span class="toc-text">2. 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">3. 配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-text">4. 基础命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">4. 常见问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%89%E8%A3%85mysql"><span class="toc-text">六、安装mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85telnet"><span class="toc-text">1. 安装telnet</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="toc-text">参考链接</span></a></li></ol></div></p>
 <h1 id="一、安装-frp-内网穿透"><a href="#一、安装-frp-内网穿透" class="headerlink" title="一、安装 frp 内网穿透"></a>一、安装 frp 内网穿透</h1><p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/blob/master/README_zh.md">frp</a>就是一个<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24723688">反向代理软件</a>，它体积轻量但功能很强大，可以<strong>使处于内网或防火墙后的设备对外界提供服务</strong>，它支持HTTP、TCP、UDP等众多协议。</p>
 <h2 id="1-服务端配置步骤"><a href="#1-服务端配置步骤" class="headerlink" title="1. 服务端配置步骤"></a>1. 服务端配置步骤</h2><ol>
 <li>下载安装包</li>
@@ -1100,6 +1155,200 @@ vi /etc/docker/daemon.json
 </blockquote>
 </li>
 </ol>
+<h1 id="五、安装ngnix"><a href="#五、安装ngnix" class="headerlink" title="五、安装ngnix"></a>五、安装ngnix</h1><h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h2><pre><code class="shell">yum -y install make zlib-devel gcc-c++ libtool openssl openssl-devel
+</code></pre>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><pre><code class="shell"># 创建目录并进入
+mkdir usr/local/nginx &amp;&amp; cd usr/local/nginx
+
+# 下载安装包
+wget http://nginx.org/download/nginx-1.17.0.tar.gz
+
+# 解压
+tar zxf nginx-1.17.0.tar.gz
+
+# 进入
+cd nginx-1.17.0
+
+# 验证 
+./configure --prefix=/usr/local/nginx/nginx-1.17.0 --with-http_stub_status_module
+./configure --prefix=/usr/local/nginx/nginx-1.17.0 --with-http_stub_status_module --with-http_ssl_module
+
+
+# 编译
+make &amp;&amp; make install
+
+#测试
+./sbin/nginx
+</code></pre>
+<h2 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3. 配置文件"></a>3. 配置文件</h2><pre><code class="properties"># 权限问题
+user  root;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events &#123;
+    worker_connections  1024;
+&#125;
+
+
+http &#123;
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;
+    #                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;
+    #                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server &#123;
+        listen       80;
+        server_name  manage1.fyha-vip.com;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location / &#123;
+            root   /root/fy-web/dist/;
+            try_files $uri $uri/ /index.html;
+            index  index.html index.htm;
+        &#125;
+
+        location /fy/ &#123;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header REMOTE-HOST $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://localhost:8080/;
+        &#125;
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html &#123;
+            root   html;
+        &#125;
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ &#123;
+        #    proxy_pass   http://127.0.0.1;
+        #&#125;
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ &#123;
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #&#125;
+
+        # deny access to .htaccess files, if Apache&#39;s document root
+        # concurs with nginx&#39;s one
+        #
+        #location ~ /\.ht &#123;
+        #    deny  all;
+        #&#125;
+    &#125;
+
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    #server &#123;
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / &#123;
+    #        root   html;
+    #        index  index.html index.htm;
+    #    &#125;
+    #&#125;
+
+
+    # HTTPS server
+    #
+    #server &#123;
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / &#123;
+    #        root   html;
+    #        index  index.html index.htm;
+    #    &#125;
+    #&#125;
+&#125;
+</code></pre>
+<h2 id="4-基础命令"><a href="#4-基础命令" class="headerlink" title="4. 基础命令"></a>4. 基础命令</h2><p>以下命令需要<code>nginx</code>下 <code>sbin</code>目录下执行</p>
+<pre><code class="shell">sbin/nginx -t -c conf/nginx.conf # 检测配置文件是否正常
+sbin/nginx -s reload -c conf/nginx.conf # 修改配置后平滑重启
+sbin/nginx -s quit # 优雅关闭Nginx，会在执行完当前的任务后再退出
+sbin/nginx -s stop # 强制终止Nginx，不管当前是否有任务在执行
+</code></pre>
+<h2 id="4-常见问题"><a href="#4-常见问题" class="headerlink" title="4. 常见问题"></a>4. 常见问题</h2><ol>
+<li>make: *** No rule to make target <code>build&#39;, needed by </code>default’.  Stop. make: *** 没有规则可以创建“default”需要的目标“build”。 停止。 </li>
+</ol>
+<p>![image-20221109213925108](centos 安装基本环境支持/image-20221109213925108.png)</p>
+<p>解决: 缺少依赖</p>
+<pre><code class="shell"># 安装以来后, 重新编辑
+yum -y install make zlib-devel gcc-c++ libtool openssl openssl-devel
+# 或者
+yum -y install gcc openssl openssl-devel pcre-devel zlib zlib-devel 
+
+# 重新编辑
+make &amp;&amp; make install
+</code></pre>
+<ol start="2">
+<li>nginx: [alert] could not open error log file: open() “/usr/local/nginx/nginx-1.17.0/logs/error.log” failed (2: No such file or directory)<br>2022/11/09 21:32:51 [emerg] 21615#0: open() “/usr/local/nginx/nginx-1.17.0/logs/access.log” failed (2: No such file or directory)</li>
+</ol>
+<p>解决: 缺少文件夹, </p>
+<pre><code class="shell">mkdir /usr/local/nginx/nginx-1.17.0/logs
+</code></pre>
+<ol start="3">
+<li>failed (13: Permission denied)</li>
+</ol>
+<p>缺少权限</p>
+<pre><code class="shell"># 在配置文件首行新增用户
+user  root;
+worker_processes  1;
+</code></pre>
+<h1 id="六、安装mysql"><a href="#六、安装mysql" class="headerlink" title="六、安装mysql"></a>六、安装mysql</h1><p><a href="https://monk6658.github.io/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/">mysql操作</a></p>
+<h2 id="1-安装telnet"><a href="#1-安装telnet" class="headerlink" title="1. 安装telnet"></a>1. 安装telnet</h2><pre><code class="shell"># 检测telnet-server 服务
+rpm -qa telnet-server
+# 安装telnet-server 服务
+yum install telnet-server
+# 检测 telnet
+rpm -qa telnet
+# 安装telnet
+yum install telnet
+</code></pre>
 <h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qinghuaL/p/11597695.html">1. yum 安装卸载方式</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fengyumeng/p/11133924.html">2. CentOS7安装RabbitMQ</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cwp-bg/p/10070467.html">3.rabbitmq之后台管理和用户设置(三)</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/helf/p/12889955.html">4. centos7-linux安装docker(离线方式)</a><br><a target="_blank" rel="noopener" href="https://www.jb51.net/article/167103.htm">5. Linux 离线安装docker的过程（一键式安装）</a></p>
 
       

@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>mysql操作 | 小明的博客</title>
+  <meta name="keywords" content=" sql , mysql , 函数 ">
+  <meta name="description" content="mysql操作 | 小明的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMH使用指南">
+<meta property="og:url" content="https://monk6658.github.io/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:site_name" content="小明的博客">
+<meta property="og:description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-14T09:30:46.624Z">
+<meta property="article:author" content="小明同鞋">
+<meta property="article:tag" content="基准测试工具">
+<meta property="article:tag" content="JMH">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/head.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/head.jpg" />
+</a>
+<div class="author">
+    <span>小明同鞋</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/monk6658" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1245141646&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:monk6658@163.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="All">All<small>(27)</small></div></li>
+    
+        
+            
+            <li><div data-rel="工具">工具<small>(7)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="并发">并发<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="并发、netty">并发、netty<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="小程序">小程序<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="中间件">中间件<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="docker">docker<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JAVA">JAVA<small>(8)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="JVM">JVM<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Linux">Linux<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="mysql">mysql<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="oracle">oracle<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a  class="friends">Friends</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="27">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">原hexo主题博主</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>按位与</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>并发</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>博客</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分包粘包</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>基准测试工具</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>面试</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>排序</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>哨兵</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>死锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁机制</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>锁netty</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>微信支付</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>位运算</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>小程序</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>异常</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>运维</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>支付宝</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>中间件</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>主从</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>centos</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>cer</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Comparable</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Comparator</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>docker</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Erlang</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>FinalAgent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>frp</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>hexo</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java调用c++方法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>jdk</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JMH</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JNA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JvisualVm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JVM</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mongodb</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nodeJs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nosql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oracle</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pfx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pycharm</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RabbitMQ</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RSA分段</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag2</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>tag3</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All JAVA "
+           href="/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"
+           data-tag="基准测试工具,JMH"
+           data-author="" >
+            <span class="post-title" title="JMH使用指南">JMH使用指南</span>
+            <span class="post-date" title="2022-09-13 00:00:00">2022/09/13</span>
+        </a>
+        
+        <a  class="All mysql "
+           href="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/"
+           data-tag="sql,mysql,函数"
+           data-author="" >
+            <span class="post-title" title="mysql操作">mysql操作</span>
+            <span class="post-date" title="2022-06-10 00:00:00">2022/06/10</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2022/05/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/ide%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/pycharm2021.3/"
+           data-tag="pycharm,FinalAgent"
+           data-author="" >
+            <span class="post-title" title="pycharm 安装及破解">pycharm 安装及破解</span>
+            <span class="post-date" title="2022-05-28 14:16:33">2022/05/28</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2022/03/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
+           data-tag="算法,java"
+           data-author="" >
+            <span class="post-title" title="算法学习">算法学习</span>
+            <span class="post-date" title="2022-03-24 14:16:33">2022/03/24</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/11/24/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/mongodb/mongodb%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AD%A6%E4%B9%A0/"
+           data-tag="mongodb,nosql"
+           data-author="" >
+            <span class="post-title" title="mongodb安装及学习">mongodb安装及学习</span>
+            <span class="post-date" title="2021-11-24 00:00:00">2021/11/24</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/"
+           data-tag="hexo,nodeJs"
+           data-author="" >
+            <span class="post-title" title="nodeJs安装及周边安装">nodeJs安装及周边安装</span>
+            <span class="post-date" title="2021-11-06 00:00:00">2021/11/06</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/06/17/java%E5%AD%A6%E4%B9%A0/jvm/NullPointerException%20%E6%B2%A1%E6%9C%89%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E6%A0%88%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA/"
+           data-tag="JVM,异常"
+           data-author="" >
+            <span class="post-title" title="NullPointerException 没有打印异常栈问题追踪">NullPointerException 没有打印异常栈问题追踪</span>
+            <span class="post-date" title="2021-06-17 14:16:33">2021/06/17</span>
+        </a>
+        
+        <a  class="All 中间件 "
+           href="/2021/06/05/%E4%B8%AD%E9%97%B4%E4%BB%B6/rabbitmq/RabbitMQ%E4%BD%BF%E7%94%A8/"
+           data-tag="中间件,RabbitMQ"
+           data-author="" >
+            <span class="post-title" title="RabbitMQ 实战">RabbitMQ 实战</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All docker "
+           href="/2021/06/05/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/linux/Docker%20%E5%A4%A7%E5%85%A8/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="docker大全">docker大全</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All Linux "
+           href="/2021/06/05/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/linux/centos%20%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83%E6%94%AF%E6%8C%81/"
+           data-tag="RabbitMQ,jdk,Erlang,frp,centos"
+           data-author="" >
+            <span class="post-title" title="centos 安装基本环境支持">centos 安装基本环境支持</span>
+            <span class="post-date" title="2021-06-05 14:16:33">2021/06/05</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/05/20/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/redis%E6%90%AD%E5%BB%BA%E5%8F%8A%E5%93%A8%E5%85%B5/redis%E6%90%AD%E5%BB%BA%E4%B8%BB%E4%BB%8E%E5%8F%8A%E5%93%A8%E5%85%B5/"
+           data-tag="redis,主从,哨兵"
+           data-author="" >
+            <span class="post-title" title="redis搭建主从及哨兵">redis搭建主从及哨兵</span>
+            <span class="post-date" title="2021-05-20 14:16:33">2021/05/20</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/21/%E9%9D%A2%E8%AF%95%E7%9B%B8%E5%85%B3/%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"
+           data-tag="面试"
+           data-author="" >
+            <span class="post-title" title="面试题">面试题</span>
+            <span class="post-date" title="2021-04-21 14:16:33">2021/04/21</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/19/java%E5%AD%A6%E4%B9%A0/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98/"
+           data-tag="并发,java"
+           data-author="" >
+            <span class="post-title" title="并发编程实战">并发编程实战</span>
+            <span class="post-date" title="2021-04-19 00:00:00">2021/04/19</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"
+           data-tag="java调用c++方法,JNA"
+           data-author="" >
+            <span class="post-title" title="JNA的使用">JNA的使用</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All JVM "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/JvisualVm%E6%8F%90%E7%A4%BA%E6%97%A0%E6%B3%95%E7%9B%91%E8%A7%86%E6%9C%AC%E5%9C%B0Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/"
+           data-tag="JvisualVm,JVM"
+           data-author="" >
+            <span class="post-title" title="JvisualVm提示无法监视本地Java应用程序解决办法">JvisualVm提示无法监视本地Java应用程序解决办法</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/RMI%20TCP%20CONNECTION%20%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98/"
+           data-tag="java调用c++方法,JNA"
+           data-author="" >
+            <span class="post-title" title="JNA的使用">JNA的使用</span>
+            <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
+        </a>
+        
+        <a  class="All 并发、netty "
+           href="/2021/03/30/netty/netty%E5%88%86%E5%8C%85%E7%B2%98%E5%8C%85%E9%97%AE%E9%A2%98/"
+           data-tag="锁netty,并发,分包粘包"
+           data-author="" >
+            <span class="post-title" title="netty分包粘包问题">netty分包粘包问题</span>
+            <span class="post-date" title="2021-03-30 14:16:33">2021/03/30</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2021/03/08/java%E5%AD%A6%E4%B9%A0/%E4%BD%8D%E8%BF%90%E7%AE%97/%E4%BD%8D%E8%BF%90%E7%AE%97/"
+           data-tag="按位与,位运算"
+           data-author="" >
+            <span class="post-title" title="位运算">位运算</span>
+            <span class="post-date" title="2021-03-08 14:16:33">2021/03/08</span>
+        </a>
+        
+        <a  class="All oracle "
+           href="/2020/12/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"
+           data-tag="sql,函数,oracle"
+           data-author="" >
+            <span class="post-title" title="oracle基础语法">oracle基础语法</span>
+            <span class="post-date" title="2020-12-17 00:00:00">2020/12/17</span>
+        </a>
+        
+        <a  class="All 并发 "
+           href="/2020/11/03/%E5%B9%B6%E5%8F%91/Java%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/"
+           data-tag="并发,锁机制,死锁"
+           data-author="" >
+            <span class="post-title" title="Java 并发基础常见面试题总结">Java 并发基础常见面试题总结</span>
+            <span class="post-date" title="2020-11-03 14:16:33">2020/11/03</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/10/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/hexo/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/"
+           data-tag="hexo,博客"
+           data-author="" >
+            <span class="post-title" title="hexo搭建静态博客">hexo搭建静态博客</span>
+            <span class="post-date" title="2020-10-28 14:16:33">2020/10/28</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/10/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/%E8%AF%81%E4%B9%A6/%E8%AF%81%E4%B9%A6%E8%BD%AC%E6%8D%A2/"
+           data-tag="pfx,cer"
+           data-author="" >
+            <span class="post-title" title="证书转换">证书转换</span>
+            <span class="post-date" title="2020-10-28 14:16:33">2020/10/28</span>
+        </a>
+        
+        <a  class="All JAVA "
+           href="/2020/10/27/java%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E5%85%B7%E5%8C%85%E5%AD%A6%E4%B9%A0/Comparable%E4%B8%8EComparator/"
+           data-tag="Comparable,Comparator,排序"
+           data-author="" >
+            <span class="post-title" title="Comparable与Comparator">Comparable与Comparator</span>
+            <span class="post-date" title="2020-10-27 14:16:33">2020/10/27</span>
+        </a>
+        
+        <a  class="All 小程序 "
+           href="/2020/10/21/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3/rsa%E5%88%86%E6%AE%B5%E5%8A%A0%E5%AF%86(%E5%B0%8F%E7%A8%8B%E5%BA%8F+java%E5%90%8E%E5%8F%B0)/"
+           data-tag="小程序,RSA分段"
+           data-author="" >
+            <span class="post-title" title="rsa分段加密（小程序+java后台）">rsa分段加密（小程序+java后台）</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All 并发 "
+           href="/2020/10/21/%E5%B9%B6%E5%8F%91/%E6%82%B2%E8%A7%82%E9%94%81%E4%B8%8E%E4%B9%90%E8%A7%82%E9%94%81/"
+           data-tag="并发,锁机制"
+           data-author="" >
+            <span class="post-title" title="悲观锁与乐观锁">悲观锁与乐观锁</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All oracle "
+           href="/2020/10/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%20%E8%AF%AF%E5%88%A0%E6%95%B0%E6%8D%AE%E3%80%81%E8%A1%A8%E7%9A%84%E6%81%A2%E5%A4%8D/"
+           data-tag="运维,tag2,tag3"
+           data-author="" >
+            <span class="post-title" title="oracle 误删数据、表的恢复">oracle 误删数据、表的恢复</span>
+            <span class="post-date" title="2020-10-21 14:16:33">2020/10/21</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2020/03/25/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/%E8%81%9A%E5%90%88%E6%94%AF%E4%BB%98%E6%8B%89%E8%B5%B7%E6%B5%81%E7%A8%8B/%E8%81%9A%E5%90%88%E6%94%AF%E4%BB%98%E6%B5%81%E7%A8%8B/"
+           data-tag="微信支付,支付宝"
+           data-author="" >
+            <span class="post-title" title="聚合支付">聚合支付</span>
+            <span class="post-date" title="2020-03-25 14:16:33">2020/03/25</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-数据库操作/mysql/mysql详解" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">mysql操作</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="mysql">mysql</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">sql</a>
+            
+            <a class="color1">mysql</a>
+            
+            <a class="color3">函数</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2022-11-16 16:34:09'>2022-06-10 00:00</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-mysql-%E5%AE%89%E8%A3%85"><span class="toc-text">1 mysql 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-zip-%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="toc-text">1.1  zip 安装方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-text">1.1.1 文件下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-%E5%88%9B%E5%BB%BA%E9%80%89%E9%A1%B9%E6%96%87%E4%BB%B6"><span class="toc-text">1.1.2 创建选项文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-my-ini"><span class="toc-text">1.1.3 数据库配置文件 my.ini</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-4-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.1.4 配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-5-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E7%9B%AE%E5%BD%95"><span class="toc-text">1.1.5 初始化数据目录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-1-%E6%8C%87%E4%BB%A4%E7%9B%B8%E5%85%B3"><span class="toc-text">1.1.5.1 指令相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-2-%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-text">1.1.5.2 参数详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-3-%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C"><span class="toc-text">1.1.5.3 初始化操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-5-1-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="toc-text">1.1.5.1 常见错误</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-6-%E6%9C%8D%E5%8A%A1%E6%89%A7%E8%A1%8C"><span class="toc-text">1.1.6 服务执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-7-%E6%B5%8B%E8%AF%95%E5%AE%89%E8%A3%85"><span class="toc-text">1.1.7 测试安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-linux-%E5%AE%89%E8%A3%85"><span class="toc-text">1.2 linux 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E8%BF%9B%E5%85%A5%E7%9B%AE%E5%BD%95-%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="toc-text">1.2.1 进入目录 下载文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">1.2.2 创建配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7%E5%8F%8A%E9%85%8D%E7%BD%AEmysql%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">1.2.3 创建用户及配置mysql环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-%E6%9C%8D%E5%8A%A1%E5%88%9D%E5%A7%8B%E5%8C%96-%E5%8F%8A%E5%90%AF%E5%8A%A8"><span class="toc-text">1.2.4 服务初始化 及启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-5-%E4%BF%AE%E6%94%B9mysql%E5%AF%86%E7%A0%81"><span class="toc-text">1.2.5 修改mysql密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-6-%E9%94%99%E8%AF%AF%E8%A7%A3%E6%9E%90"><span class="toc-text">1.2.6 错误解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-text">2. 基础操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="toc-text">2.1 应用程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-mysqladmin"><span class="toc-text">2.1.1 mysqladmin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-mysqlcheck"><span class="toc-text">2.1.2 mysqlcheck</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-mysqldump"><span class="toc-text">2.1.3 mysqldump</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-mysqlimport"><span class="toc-text">2.1.4 mysqlimport</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">2.1  数据库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-text">2.1.1 基础操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">2.1.2 创建数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E8%A1%A8"><span class="toc-text">2.1.3 表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-1-%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="toc-text">2.1.3.1 创建表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-2-%E6%9F%A5%E7%9C%8B%E8%A1%A8"><span class="toc-text">2.1.3.2 查看表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-3-%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="toc-text">2.1.3.3 修改表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-%E5%AF%BC%E5%85%A5%E8%A1%A8-LOAD-DATA-LOCAL"><span class="toc-text">2.1.4 导入表 LOAD DATA LOCAL</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%A6%E8%A7%A3"><span class="toc-text">索引详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="toc-text">相关知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MyISAM%E4%B8%8EInnoDB%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">MyISAM与InnoDB的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文以<code>mysql 8.0.29</code>版本为例</p>
+<h1 id="1-mysql-安装"><a href="#1-mysql-安装" class="headerlink" title="1 mysql 安装"></a>1 mysql 安装</h1><h2 id="1-1-zip-安装方式"><a href="#1-1-zip-安装方式" class="headerlink" title="1.1  zip 安装方式"></a>1.1  zip 安装方式</h2><h3 id="1-1-1-文件下载"><a href="#1-1-1-文件下载" class="headerlink" title="1.1.1 文件下载"></a>1.1.1 文件下载</h3><p>下载网址是：<a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a>  ， 根据图进行安装包下载, 解压后的<code>mysql</code>放置 <code>D:\software\mysql</code>目录下</p>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220610085641811.png" alt="下载页面"></p>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220610085703869.png" alt="点击下载"></p>
+<h3 id="1-1-2-创建选项文件"><a href="#1-1-2-创建选项文件" class="headerlink" title="1.1.2 创建选项文件"></a>1.1.2 <span id="1.1.2">创建选项文件</span></h3><ul>
+<li>创建数据文件夹    <code>D:\software\mysql\data</code></li>
+<li>创建文件上传文件夹  <code>D:\software\mysql\upload</code></li>
+<li>创建基础文件夹 <strong>basedir</strong> <code>D:\software\mysql</code></li>
+<li>在mysql 基础文件夹目录下[<code>D:\software\mysql</code>]创建<code>my.ini</code>数据库配置文件</li>
+</ul>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220617103638720.png" alt="mysql安装完整目录"></p>
+<h3 id="1-1-3-数据库配置文件-my-ini"><a href="#1-1-3-数据库配置文件-my-ini" class="headerlink" title="1.1.3 数据库配置文件 my.ini"></a>1.1.3 数据库配置文件 my.ini</h3><pre><code class="ini">[mysqld]
+# 设置3306端口
+port=3306
+# 设置mysql的安装目录
+basedir=D:/software/mysql
+# 设置mysql数据库的数据的存放目录，在安装mysql-5.7.30-winx64.zip版本的时候，此配置不可添加，否则mysql将无法启动。
+datadir=D:/software/mysql/data
+# 允许最大连接数
+max_connections=200
+# 允许连接失败的次数。这是为了防止有人从该主机试图攻击数据库系统
+max_connect_errors=10
+# 服务端使用的字符集默认为UTF8
+character-set-server=UTF8MB4
+# 创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+# 默认使用“mysql_native_password”插件认证
+authentication_policy=mysql_native_password
+# 关闭ssl
+# skip_ssl
+
+# 配置时区
+default-time_zone=&#39;+8:00&#39;
+[mysql]
+# 设置mysql客户端默认字符集
+default-character-set=utf8
+[client]
+# 设置mysql客户端连接服务端时默认使用的端口
+port=3306
+default-character-set=utf8
+</code></pre>
+<p><font color="red">注: 使用单斜杠 /  , 或者使用双斜杠 \\ </font></p>
+<h3 id="1-1-4-配置环境变量"><a href="#1-1-4-配置环境变量" class="headerlink" title="1.1.4 配置环境变量"></a>1.1.4 配置环境变量</h3><p>不配置系统环境变量时,    <code>mysql</code>命令仅能在<code>bin</code>目录下进行执行.    如下图示例: </p>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220610155203075.png" alt="image-20220610155203075"></p>
+<p><strong>此电脑→右键→属性→高级系统设置→环境变量</strong>,    系统变量<code>path</code>里新增对应<code>bin</code>目录. eg: <code>D:\software\mysql\bin</code></p>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220610155540727.png" alt="image-20220610155540727"></p>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220610155419846.png" alt="image-20220610155419846"></p>
+<h3 id="1-1-5-初始化数据目录"><a href="#1-1-5-初始化数据目录" class="headerlink" title="1.1.5 初始化数据目录"></a>1.1.5 初始化数据目录</h3><p>确定创建完选项文件夹, <a href="#1.1.2">1.1.2 创建选项文件夹</a> , 在命令行执行</p>
+<h4 id="1-1-5-1-指令相关"><a href="#1-1-5-1-指令相关" class="headerlink" title="1.1.5.1 指令相关"></a>1.1.5.1 指令相关</h4><pre><code class="shell"># 基础初始化
+mysqld --initialize --console
+
+# 需求定制初始化
+mysqld --initialize --user=mysql # 用户
+    --defaults-file=D:/software/mysql/my.ini # 配置文件
+    --basedir=D:/software/mysql # 基础数据目录
+    --datadir=D:/software/mysql/data # 数据目录
+    --defaults-extra-file= # 额外配置文件
+    --init-file=D:/software/mysql/student.sql # 初始化执行sql
+</code></pre>
+<h4 id="1-1-5-2-参数详解"><a href="#1-1-5-2-参数详解" class="headerlink" title="1.1.5.2 参数详解"></a>1.1.5.2 <strong>参数详解</strong></h4><ul>
+<li><p>用于<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_initialize"><code>--initialize</code></a>“ 默认安全”安装（即包括生成随机初始 <code>root</code>密码）。在这种情况下，密码被标记为过期，您必须选择一个新密码。</p>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220617164057478.png" alt="mysql初始化生成随机密码">使用<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_initialize-insecure"><code>--initialize-insecure</code></a>，不会<code>root</code>生成密码。这是不安全的。<code>mysql -uroot --skip-password</code></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_console"><code>--console</code></a>使默认日志输出至控制台, 不加该选项时, 错误日志默认在<code>datadir</code>目录下, 带有<code>.err</code>扩展名的文件.  可使用<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_log-error"><code>--log-error</code></a> 设置</p>
+</li>
+</ul>
+<h4 id="1-1-5-3-初始化操作"><a href="#1-1-5-3-初始化操作" class="headerlink" title="1.1.5.3 初始化操作"></a>1.1.5.3 初始化操作</h4><ol>
+<li><p>服务器检查数据目录是否存在, 不存在创建</p>
+</li>
+<li><p>在数据目录中，服务器创建 <code>mysql</code>系统模式及其表，包括数据字典表、授权表、时区表和服务器端帮助表。请参阅 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/system-schema.html">第 5.3 节，“mysql 系统架构”</a>。</p>
+</li>
+<li><p>服务器初始化管理表所需的 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_system_tablespace">系统表空间</a>和相关数据结构<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html"><code>InnoDB</code></a>。(可以通过配置文件设置)</p>
+</li>
+<li><p>服务器创建一个<code>&#39;root&#39;@&#39;localhost&#39;</code> 超级用户帐户和其他保留帐户（请参阅 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/reserved-accounts.html">第 6.2.9 节，“保留帐户”</a>）。某些保留帐户已锁定，客户端无法使用，但 <code>&#39;root&#39;@&#39;localhost&#39;</code>仅供管理使用，您应为其分配密码。</p>
+</li>
+<li><p>服务器填充用于<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/help.html"><code>HELP</code></a>语句的服务器端帮助表（请参阅 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/help.html">第 13.8.3 节，“帮助语句”</a>）。服务器不填充时区表。要手动执行此操作，请参阅 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html">第 5.1.15 节，“MySQL 服务器时区支持”</a>。</p>
+</li>
+<li><p>如果<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_init_file"><code>init_file</code></a>给定系统变量来命名 SQL 语句文件，则服务器将执行文件中的语句。此选项使您能够执行自定义引导序列。</p>
+<p>当服务器以引导模式运行时，某些功能不可用，从而限制了文件中允许的语句。其中包括与帐户管理（例如<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/create-user.html"><code>CREATE USER</code></a>or <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/grant.html"><code>GRANT</code></a>）、复制和全局事务标识符相关的语句。</p>
+</li>
+<li><p>服务器退出。</p>
+</li>
+</ol>
+<h4 id="1-1-5-1-常见错误"><a href="#1-1-5-1-常见错误" class="headerlink" title="1.1.5.1 常见错误"></a>1.1.5.1 常见错误</h4><ol>
+<li>  初始化数据目录报错 [ERROR] –initialize specified but the data directory has files in it</li>
+</ol>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220617144029390.png" alt="数据文件夹存在内容错误"></p>
+<p>解决方案: 数据文件夹<code>D:\software\mysql\data</code>存在内容, 清除文件夹内容, 重新执行即可</p>
+<ol start="2">
+<li>连接mysql报错 mysqld: Can not perform keyring migration : Invalid –keyring-migration-source option.</li>
+</ol>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220617144350440.png" alt="Can not perform keyring migration"></p>
+<p>解决方案: <code>mysql -uroot -p</code></p>
+<h3 id="1-1-6-服务执行"><a href="#1-1-6-服务执行" class="headerlink" title="1.1.6 服务执行"></a>1.1.6 服务执行</h3><pre><code class="shell"># 启动 
+mysqld --console
+
+#关闭
+mysqladmin -u root shutdown
+
+# 安装系统服务
+ mysqld --install [服务名(默认mysql)] [--defaults-file=D:/software/mysql/my.ini]
+
+# 启动服务
+net start mysql
+
+# 关停服务
+net stop mysql
+
+# 删除服务
+sc delete mysql
+mysqld --remove
+</code></pre>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20220617161422988.png" alt="mysql服务操作图片"></p>
+<h3 id="1-1-7-测试安装"><a href="#1-1-7-测试安装" class="headerlink" title="1.1.7 测试安装"></a>1.1.7 测试安装</h3><pre><code class="shell"># 测试登陆
+mysql -uroot -p
+Enter password: ************
+
+show databases;
+# 出现错误如下
+ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+
+# 首次操作需更改过期密码
+ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;
+</code></pre>
+<h2 id="1-2-linux-安装"><a href="#1-2-linux-安装" class="headerlink" title="1.2 linux 安装"></a>1.2 linux 安装</h2><h3 id="1-2-1-进入目录-下载文件"><a href="#1-2-1-进入目录-下载文件" class="headerlink" title="1.2.1 进入目录 下载文件"></a>1.2.1 进入目录 下载文件</h3><pre><code class="shell"># 下载文件
+wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.20-linux-glibc2.12-x86_64.tar.xz
+# 解压
+tar xvJf mysql-8.0.20-linux-glibc2.12-x86_64.tar.xz 
+# 移动到指定文件夹
+mv mysql-8.0.20-linux-glibc2.12-x86_64 /usr/local/mysql
+# 进入文件夹路径
+cd /usr/local/mysql
+</code></pre>
+<p>以下均在 <code>/usr/local/mysql</code>路径下操作</p>
+<h3 id="1-2-2-创建配置文件"><a href="#1-2-2-创建配置文件" class="headerlink" title="1.2.2 创建配置文件"></a>1.2.2 创建配置文件</h3><pre><code class="shell">touch /usr/local/mysql/my.cnf
+vim /usr/local/mysql/my.cnf
+</code></pre>
+<pre><code class="ini">[mysqld]
+user=mysql
+#设置3306端口
+port=3306
+#设置mysql的安装目录
+basedir=/usr/local/mysql
+#设置mysql数据库的数据的存放目录
+datadir=/usr/local/mysql/data
+log-error=/usr/local/mysql/data/mysql.err
+pid-file=/usr/local/mysql/data/mysql.pid
+#允许最大连接数
+max_connections=200
+#允许连接失败的次数。
+max_connect_errors=10
+#服务端使用的字符集默认为utf8mb4
+character-set-server=utf8mb4
+#创建新表时将使用的默认存储引擎
+default-storage-engine=INNODB
+#默认使用“mysql_native_password”插件认证
+#mysql_native_password
+default_authentication_plugin=mysql_native_password
+[mysql]
+#设置mysql客户端默认字符集
+default-character-set=utf8mb4
+[client]
+#设置mysql客户端连接服务端时默认使用的端口
+port=3306
+default-character-set=utf8mb4
+</code></pre>
+<h3 id="1-2-3-创建用户及配置mysql环境变量"><a href="#1-2-3-创建用户及配置mysql环境变量" class="headerlink" title="1.2.3 创建用户及配置mysql环境变量"></a>1.2.3 创建用户及配置mysql环境变量</h3><p>注: 创建得用户 需和 配置文件<code>/usr/local/mysql/my.cnf</code>节点**[mysqld]**下 <code>user=mysql</code>相等</p>
+<pre><code class="bash"># 添加mysql组
+groupadd mysql
+
+ # 添加mysql用户
+useradd -g mysql mysql
+ 
+ #-R 处理指定目录以及其子目录下的所有文件
+chown -R mysql.mysql /usr/local/mysql 
+chmod 750 /usr/local/mysql -R
+
+# 创建软链接(可以使用 service 命令启动mysql)
+cp -a ./support-files/mysql.server /etc/init.d/mysql
+</code></pre>
+<pre><code class="shell"># 编辑环境变量 
+vim /etc/profile
+
+# 在配置文件最后一行新增 mysql bin地址
+export PATH=$PATH:/usr/local/mysql/bin:/usr/local/mysql/lib
+</code></pre>
+<p>注: 编辑环境变量后,  <code>mysql</code>命令可在任何路径下执行</p>
+<h3 id="1-2-4-服务初始化-及启动"><a href="#1-2-4-服务初始化-及启动" class="headerlink" title="1.2.4 服务初始化 及启动"></a>1.2.4 服务初始化 及启动</h3><pre><code class="shell"># 创建data文件(没文件夹初始化会报错)
+mkdir /usr/local/mysql/data
+
+# 初始化mysql [指定配置文件/基础目录/数据目录]
+./bin/mysqld --defaults-file=/usr/local/mysql/my.cnf --basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data/  --initialize
+
+# 查看初始化日志
+tail -f -n 200 /usr/local/mysql/data/mysql.err
+
+# 启动mysql
+service mysql start
+</code></pre>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20221116154055161.png" alt="image-20221116154055161"></p>
+<h3 id="1-2-5-修改mysql密码"><a href="#1-2-5-修改mysql密码" class="headerlink" title="1.2.5 修改mysql密码"></a>1.2.5 修改mysql密码</h3><pre><code class="mysql"># 测试登陆(临时密码在 初始化日志内 /usr/local/mysql/data/mysql.err 上图标红地方)
+mysql -uroot -p
+Enter password: ************
+
+
+show databases;
+# 出现错误如下
+ERROR 1820 (HY000): You must reset your password using ALTER USER statement before executing this statement.
+
+# 首次操作需更改过期密码
+ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;123456&#39;;
+
+# 开启支持远程登陆
+use mysql;
+update user set host = &#39;%&#39; where user = &#39;root&#39;;
+
+#刷新权限
+flush privileges;
+</code></pre>
+<h3 id="1-2-6-错误解析"><a href="#1-2-6-错误解析" class="headerlink" title="1.2.6 错误解析"></a>1.2.6 错误解析</h3><ol>
+<li><strong>Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2)</strong></li>
+</ol>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20221109160928768.png" alt="Can&#39;t connect to local MySQL"></p>
+<p> 没有启动mysql 服务, 启动服务即可</p>
+<ol start="2">
+<li><strong>The server quit without updating PID file (/[FAILED]l/mysql/data/mysql.pid)</strong></li>
+</ol>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20221109162411344.png" alt="The server quit without updating PID file"></p>
+<p>错误原因， 启动失败</p>
+<p>排查方向：</p>
+<ul>
+<li><p>端口占用导致启动失败  <code>netstat -tunlp | grep 3306</code></p>
+</li>
+<li><p>文件没有权限<code>cmond -R 777 /usr/local/mysql</code></p>
+</li>
+<li><p><code>skip-federated</code>字段问题,  在<code>my.cnf</code>文件注释掉 </p>
+</li>
+<li><p>配置文件存在和当前版本不符合 配置导致启动失败 <strong>使用最基础得配置逐个排查</strong></p>
+</li>
+<li><p><code>mysqld</code> 启动服务指令, 不建议在<code>root</code>用户下执行</p>
+<ol>
+<li><p>修改配置文件, 新增用户</p>
+<pre><code class="bash"># 进入文件
+vim /usr/local/mysql/my.cnf 
+# 在下输入内容：
+[mysqld]
+user=root
+...
+</code></pre>
+</li>
+<li><p>使用 <code>support-files/mysql.server</code>脚本启动时, 在启动处增加用户<code>--user=root</code>(<code>mysqld_safe </code> 也是启动<code>mysqld</code>)</p>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20221116145807362.png" alt="mysql.server内容"></p>
+</li>
+<li><p>自己脚本启动, 在启动处增加用户<code>--user=root</code></p>
+<pre><code class="bash"># 启动脚本
+./bin/mysqld --defaults-file=/usr/local/mysql/my.cnf --user=root &amp;
+
+# 查看是否启动
+ps aux|grep mysql
+</code></pre>
+<p><img src="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/image-20221116150411982.png" alt="image-20221116150411982"></p>
+</li>
+<li><p>创建用户及文件授权</p>
+<pre><code class="bash"># 添加mysql组
+groupadd mysql
+
+ # 添加mysql用户
+useradd -g mysql mysql
+ 
+ #-R 处理指定目录以及其子目录下的所有文件
+chown -R mysql.mysql /usr/local/mysql 
+chmod 750 /usr/local/mysql -R
+
+# 在mysql 配置文件内增加  用户 /usr/local/mysql/my.cnf
+[mysqld]
+user=mysql
+...
+</code></pre>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li><p><strong>提示缺少文件相关文件.  直接创建文件即可 <code>mkdir /xx/xx</code></strong></p>
+</li>
+<li><p><strong>./bin/mysql: error while loading shared libraries: libtinfo.so.5</strong></p>
+<pre><code class="bash">ln -s /usr/lib64/libtinfo.so.6.1 /usr/lib64/libtinfo.so.5
+</code></pre>
+</li>
+<li><p><strong>Host ‘xxx’ is not allowed to connect to this MySQL server</strong></p>
+<p>MySQL不允许远程登录, 开启远程登陆 <code>mysql -uroot -p</code></p>
+<pre><code class="mysql">use mysql;
+update user set host = &#39;%&#39; where user = &#39;root&#39;;
+FLUSH PRIVILEGES;
+</code></pre>
+</li>
+</ol>
+<h1 id="2-基础操作"><a href="#2-基础操作" class="headerlink" title="2. 基础操作"></a>2. 基础操作</h1><h2 id="2-1-应用程序"><a href="#2-1-应用程序" class="headerlink" title="2.1 应用程序"></a>2.1 应用程序</h2><h3 id="2-1-1-mysqladmin"><a href="#2-1-1-mysqladmin" class="headerlink" title="2.1.1 mysqladmin"></a>2.1.1 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysqladmin.html">mysqladmin</a></h3><p>用于执行管理操作的客户端。您可以使用它来检查服务器的配置和当前状态，创建和删除数据库等等。</p>
+<p><strong>语法</strong>: </p>
+<blockquote>
+<p>mysqladmin [<em>options</em>] <em>command</em> [<em>command-arg</em>] [<em>command</em> [<em>command-arg</em>]] …</p>
+</blockquote>
+<p><strong>command</strong>:</p>
+<ul>
+<li><p><code>-c</code> count                #自动运行次数统计，必须和 -i 一起使用</p>
+</li>
+<li><p><code>-i</code> number              #间隔多长时间重复执行</p>
+</li>
+<li><p><code>extended-status</code>   # 显示扩展信息 (可以通过 -i 间断执行, 获取时间变化值)</p>
+</li>
+<li><p><code>flush-hosts</code>            #刷新主机缓存中的所有信息</p>
+</li>
+<li><p><code>flush-logs</code>           #刷新所有日志。</p>
+</li>
+<li><p><code>ping</code>                      #检查服务器是否可用</p>
+</li>
+<li><p><code>version</code>                 # 查询服务器的版本</p>
+</li>
+<li><p><code>reload</code>                 #重新加载授权表。</p>
+</li>
+<li><p><code>flush-privileges</code>       #重新加载授权表</p>
+</li>
+<li><p><code>flush-status</code>            #清除状态变量。</p>
+</li>
+<li><p><code>flush-tables</code>        #刷新所有表。</p>
+</li>
+<li><p><code>flush-threads</code>  #刷新线程缓存。</p>
+</li>
+<li><p><code>refresh</code>               #刷新所有表并关闭和打开日志文件。</p>
+</li>
+<li><p><code>shutdown</code>              #停止服务器。</p>
+</li>
+<li><p><code>status</code>                    # 显示简短的服务器状态消息</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Uptime"><code>Uptime</code></a>            #MySQL 服务器已运行的秒数。</p>
+</li>
+<li><p><code>Threads</code>          #活动线程（客户端）的数量。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Questions"><code>Questions</code></a>       #自服务器启动以来来自客户端的问题（查询）数。</p>
+</li>
+<li><p><code>Slow queries</code>  #耗时超过 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_long_query_time"><code>long_query_time</code></a>秒的查询数。请参阅<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/slow-query-log.html">第 5.4.5 节，“慢查询日志”</a>。</p>
+</li>
+<li><p><code>Opens</code>              #服务器已打开的表数。</p>
+</li>
+<li><p><code>Flush tables</code>  #<code>flush-*</code>服务器已执行的、 <code>refresh</code>和<code>reload</code> 命令的 数量。</p>
+</li>
+<li><p><code>Open tables</code>    #当前打开的表数。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>常用命令</strong>:</p>
+<pre><code class="shell"># 每个两秒查看一次服务器的状态，总共重复5次
+mysqladmin -i 2 -c 5 status -uroot -p123456
+
+# 显示服务器所有运行的进程
+mysqladmin processlist -u root -p123456
+
+# mysqladmin 执行kill 进程(必须具有 CONNECTION_ADMIN特权)
+mysqladmin kill id -uroot -p
+
+# 重载权限信息
+mysqladmin reload -u root -p123456
+
+# 刷新所有表缓存，并关闭和打开log
+ mysqladmin refresh -u root -p123456
+ 
+ # 停止和启动MySQL 在副本服务器上停止复制  ( 8.0.26之前, xxx-slave)
+ mysqladmin stop-replica -u root -p
+ mysqladmin start-replica -u root -p
+ 
+ # 同时执行多个命令
+ mysqladmin process status version -u root -p
+ 
+ # 修改root 密码 (windows 使用双引号,单引号会当作密码一部分) 不安全得.
+mysqladmin password &quot;12345&quot; -u root -p123456
+
+# 数值统计
+mysqladmin -P3306 -uroot -pXXX -hXXX -r -i 1 ext |\
+awk -F&quot;|&quot; \
+&quot;BEGIN&#123; count=0; &#125;&quot;\
+&#39;&#123; if($2 ~ /Variable_name/ &amp;&amp; ++count == 1)&#123;\
+    print &quot;----------|---------|--- MySQL Command Status --|----- Innodb row operation ----|-- Buffer Pool Read --&quot;;\
+    print &quot;---Time---|---QPS---|select insert update delete|  read inserted updated deleted|   logical    physical&quot;;\
+&#125;\
+else if ($2 ~ /Queries/)&#123;queries=$3;&#125;\
+else if ($2 ~ /Com_select /)&#123;com_select=$3;&#125;\
+else if ($2 ~ /Com_insert /)&#123;com_insert=$3;&#125;\
+else if ($2 ~ /Com_update /)&#123;com_update=$3;&#125;\
+else if ($2 ~ /Com_delete /)&#123;com_delete=$3;&#125;\
+else if ($2 ~ /Innodb_rows_read/)&#123;innodb_rows_read=$3;&#125;\
+else if ($2 ~ /Innodb_rows_deleted/)&#123;innodb_rows_deleted=$3;&#125;\
+else if ($2 ~ /Innodb_rows_inserted/)&#123;innodb_rows_inserted=$3;&#125;\
+else if ($2 ~ /Innodb_rows_updated/)&#123;innodb_rows_updated=$3;&#125;\
+else if ($2 ~ /Innodb_buffer_pool_read_requests/)&#123;innodb_lor=$3;&#125;\
+else if ($2 ~ /Innodb_buffer_pool_reads/)&#123;innodb_phr=$3;&#125;\
+else if ($2 ~ /Uptime / &amp;&amp; count &gt;= 2)&#123;\
+  printf(&quot; %s |%9d&quot;,strftime(&quot;%H:%M:%S&quot;),queries);\
+  printf(&quot;|%6d %6d %6d %6d&quot;,com_select,com_insert,com_update,com_delete);\
+  printf(&quot;|%6d %8d %7d %7d&quot;,innodb_rows_read,innodb_rows_inserted,innodb_rows_updated,innodb_rows_deleted);\
+  printf(&quot;|%10d %11d\n&quot;,innodb_lor,innodb_phr);\
+&#125;&#125;&#39;
+</code></pre>
+<h3 id="2-1-2-mysqlcheck"><a href="#2-1-2-mysqlcheck" class="headerlink" title="2.1.2 mysqlcheck"></a>2.1.2 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysqlcheck.html">mysqlcheck</a></h3><p>用于检查、修复、优化或分析表。每个表都被锁定，因此在处理它时对其他会话不可用。<a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysqlcheck.html"><strong>mysqlcheck</strong></a>必须在 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysqld.html"><strong>mysqld</strong></a>服务器运行时使用，这意味着您不必停止服务器来执行表维护。（整体更适用于MyISAM引擎）</p>
+<p><font color="red">最好在执行表修复操作之前对表进行备份；在某些情况下，该操作可能会导致数据丢失。可能的原因包括但不限于文件系统错误。</font></p>
+<p><strong>语法</strong>: </p>
+<blockquote>
+<p>mysqlcheck [<em>options</em>] [–databases] <em>db_name</em> [<em>tbl_name</em> …]</p>
+<p>mysqlcheck [<em>options</em>] –all-databases</p>
+</blockquote>
+<p><strong>options</strong>:</p>
+<ul>
+<li>-A, –all-databases —选择所有的库</li>
+<li>-a, –analyze —分析表</li>
+<li>-B, –databases —选择多个库</li>
+<li>-c, –check —检查表</li>
+<li>-o, –optimize —优化表</li>
+<li>-C, –check-only-changed —最后一次检查之后变动的表</li>
+<li>-auto-repair —自动修复表</li>
+<li>-g, –check-upgrade —检查表是否有版本变更，可用 auto-repair修复</li>
+<li>-F, –fast —只检查没有正常关闭的表</li>
+<li>-f, –force —忽悠错误，强制执行</li>
+<li>-e, –extended —表的百分百完全检查，速度缓慢</li>
+<li>-m, –medium-check —近似完全检查，速度比 –extended稍快</li>
+<li>-q, –quick —最快的检查方式，在repair 时使用该选项，则只会修复 index tree</li>
+<li>-r, –repair —修复表</li>
+<li>-s, –silent —只打印错误信息</li>
+</ul>
+<p><strong>常用命令</strong>:</p>
+<pre><code class="shell"># 检查所有数据库中的表： 
+mysqlcheck -A -c  -u root -p123456
+# 检查特定数据库mysql ,sys 中的表： 
+mysqlcheck -c -B mysql sys  -u root -p123456
+# 分析所有库的表: 
+mysqlcheck -a -A -u root -p123456
+# 慎用`optimize`操作，表数据大时会消耗很多时间。操作为，创建一个新表，将行复制到目标表，删除实际表并重命名新创建的表。recreate + analyze
+# 优化表: 
+# mysqlcheck -o mysql user -u root -p123456
+# 修复表： 
+# mysqlcheck -r mysql user -u root -p123456
+</code></pre>
+<h3 id="2-1-3-mysqldump"><a href="#2-1-3-mysqldump" class="headerlink" title="2.1.3 mysqldump"></a>2.1.3 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html">mysqldump</a></h3><p>执行 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/glossary.html#glos_logical_backup">逻辑备份</a>，生成一组 SQL 语句，可以执行这些语句来重现原始数据库对象定义和表数据 。</p>
+<p><font color="red">关于备份时, 有些限制如慢查询日志, 操作不当锁表问题. 使用时请谨慎</font></p>
+<p><strong>语法</strong>: </p>
+<blockquote>
+<p>mysqldump [options] &gt; dump.sql</p>
+</blockquote>
+<p><strong>options</strong>:</p>
+<ul>
+<li><code>--all-databases</code>  , -A                 # 导出全部数据库。</li>
+<li><code>--all-tablespaces</code>  , -Y              # 导出全部表空间。</li>
+<li><code>--no-tablespaces</code>  , -y              # 不导出任何表空间信息</li>
+<li><code>--add-drop-database</code>               # 每个数据库创建之前添加drop数据库语句</li>
+<li><code>--add-drop-table</code>                      # 表创建之前添加drop数据表语句。(默认为打开状态，使用–skip-add-drop-table取消选项)</li>
+<li><code>--add-locks</code>                              # 表导出之前增加LOCK TABLES并且之后UNLOCK  TABLE。(默认为打开状态，使用–skip-add-locks取消选项)</li>
+<li><code>--complete-insert</code>,  -c               # 使用完整的insert语句(包含列名称)。这么做能提高插入效率，但是可能会受到<code>max_allowed_packet</code>参数的影响而导致插入失败。</li>
+<li><code>--flush-logs</code>：开始备份时，切换binlog日志</li>
+<li><code>--master-data</code>：默认1，输出包含CHANGE MASTER TO语句，标记<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=dump&spm=1001.2101.3001.7020">dump</a>源的二进制日志坐标（文件名和位置），设置为2时，输出注释的CHANGE MASTER TO语句</li>
+<li><code>--single-transaction</code>：使用可重复读(REPEATABLE READ)事务隔离级别来保证整个dump过程中数据一致性（开始备份前begin开启事务，保证数据一致性），该选项仅对InnoDB表有用，且不能与ALTER TABLE/CREATE TABLE/DROP TABLE/RENAME TABLE/TRUNCATE TABLE等DDL操作并行。 与 <a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html#option_mysqldump_quick"><code>--quick</code></a>选项结合使用。</li>
+<li><code>--hex-blob</code>：以16进制导出blob字段数据，防止乱码。</li>
+<li><code>--set-gtid-purged</code>：默认AUTO，即数据库开启GTID时在备份文件中加入SET @@GLOBAL.GTID_PURGED语句，未开启时啥也不做。如果设置为ON，但数据库没有开启GTID会报错，非全备时，会提醒要设置为OFF。</li>
+<li><code>--opt</code>           此选项默认启用(默认锁表)，是 . 它提供了快速转储操作并生成可以快速重新加载到 MySQL 服务器的转储文件。 –add-drop-table –add-locks –create-options –disable-keys –extended-insert –lock-tables –quick –set-charset</li>
+</ul>
+<p><strong>常用命令</strong>:</p>
+<pre><code class="shell"># 权限
+grant select,show view,trigger,lock tables on database.table_name to user_name;
+
+# 备份所有数据库：
+mysqldump  --all-databases &gt; E:\\all.db -uroot -p
+
+# 备份指定数据库排除某些表
+mysqldump  test --ignore-table=test.t1 --ignore-table=test.t2 &gt; E:\\all.db -uroot -p
+
+# 还原
+mysql db_name &lt; E:\\all.db -uroot -p
+mysql -e &quot;source E:\\all.db&quot; db_name -uroot -p
+
+# 一个服务器填充至另一个服务器
+mysqldump --opt db_name | mysql --host=remote_host -C db_name
+
+# 从一个 MySQL 服务器复制到另一个来填充数据库 column-statistics 禁用列统计信息,禁用生成直方图
+mysqldump [--column-statistics=0] --host=remote_host vfs_test aaa -uroot -pXXX | mysql --host=localhost test -uroot -pXXX
+</code></pre>
+<h3 id="2-1-4-mysqlimport"><a href="#2-1-4-mysqlimport" class="headerlink" title="2.1.4 mysqlimport"></a>2.1.4 mysqlimport</h3><h2 id="2-1-数据库操作"><a href="#2-1-数据库操作" class="headerlink" title="2.1  数据库操作"></a>2.1  数据库操作</h2><h3 id="2-1-1-基础操作"><a href="#2-1-1-基础操作" class="headerlink" title="2.1.1 基础操作"></a>2.1.1 基础操作</h3><pre><code class="shell"># 登陆数据库 [-h 主机地址 -u 用户名 -p 密码]
+mysql -h 127.0.0.1 -u root -p 
+
+# 退出
+quit;
+\q
+
+# 查询 以 ; 结束 \c 取消查询
+select user() \c
+</code></pre>
+<h3 id="2-1-2-创建数据库"><a href="#2-1-2-创建数据库" class="headerlink" title="2.1.2 创建数据库"></a>2.1.2 创建数据库</h3><pre><code class="shell">mysql -h 127.0.0.1 -u root -p menagerie
+
+# 创建数据库
+CREATE DATABASE menagerie;
+
+# 选择数据库
+USE menagerie;
+
+# 查看当前数据库
+SELECT DATABASE();
+</code></pre>
+<h3 id="2-1-3-表"><a href="#2-1-3-表" class="headerlink" title="2.1.3 表"></a>2.1.3 表</h3><h4 id="2-1-3-1-创建表"><a href="#2-1-3-1-创建表" class="headerlink" title="2.1.3.1 创建表"></a>2.1.3.1 创建表</h4><pre><code class="shell">
+
+</code></pre>
+<h4 id="2-1-3-2-查看表"><a href="#2-1-3-2-查看表" class="headerlink" title="2.1.3.2 查看表"></a>2.1.3.2 查看表</h4><pre><code class="shell">describe table;
+desc table;
+</code></pre>
+<h4 id="2-1-3-3-修改表"><a href="#2-1-3-3-修改表" class="headerlink" title="2.1.3.3 修改表"></a>2.1.3.3 修改表</h4><h3 id="2-1-4-导入表-LOAD-DATA-LOCAL"><a href="#2-1-4-导入表-LOAD-DATA-LOCAL" class="headerlink" title="2.1.4 导入表 LOAD DATA LOCAL"></a>2.1.4 导入表 LOAD DATA LOCAL</h3><p>txt 文件样例</p>
+<pre><code class="txt">Whistler    Gwen    bird    \N    1997-12-09    \N
+Greed    Gwen    dog    f    1997-12-01    \N
+</code></pre>
+<pre><code class="shell"># linux
+LOAD DATA LOCAL INFILE &#39;E:\\1.txt&#39; INTO TABLE pet;
+
+#  Windows 上使用 \r\n用作行终止符的编辑器创建文件. macOS 使用 &#39;\r&#39;
+LOAD DATA LOCAL INFILE &#39;E:\\1.txt&#39; INTO TABLE pet
+LINES TERMINATED BY &#39;\r\n&#39;;
+</code></pre>
+<p>错误:</p>
+<ol>
+<li><p>ERROR3948: Loading local data is disabled - this must be enabled on both the client and server sides</p>
+<pre><code class="shell">#  查看 Value=OFF
+show global variables like &#39;local_infile&#39;;
+# 更改 Value=ON
+set global local_infile=1;
+
+# 退出重新登陆
+</code></pre>
+</li>
+<li><p>ERROR 2068 (HY000): LOAD DATA LOCAL INFILE file request rejected due to restrictions on access.</p>
+<pre><code class="shell"># 使用这种登陆
+mysql -u root -p --local-infile
+</code></pre>
+</li>
+<li><p>ERROR 2 (HY000): File ‘E:\xxx\数据库操作\mysql\1.txt’ not found</p>
+<pre><code class="shell"># 文件名字不要存在中文,  \\ 或者 /
+</code></pre>
+</li>
+</ol>
+<h1 id="索引详解"><a href="#索引详解" class="headerlink" title="索引详解"></a>索引详解</h1><h1 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h1><h3 id="MyISAM与InnoDB的区别"><a href="#MyISAM与InnoDB的区别" class="headerlink" title="MyISAM与InnoDB的区别"></a>MyISAM与InnoDB的区别</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>innodb</th>
+<th>myisam</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全文索引</td>
+<td>有(大数据下,不建议使用)</td>
+<td>有</td>
+</tr>
+<tr>
+<td>索引</td>
+<td>聚集索引(索引[放在主键叶子节点上]和数据放在一起)</td>
+<td>非聚集索引</td>
+</tr>
+<tr>
+<td>事务</td>
+<td>支持</td>
+<td>无</td>
+</tr>
+<tr>
+<td>外键</td>
+<td>支持</td>
+<td>无</td>
+</tr>
+<tr>
+<td>锁</td>
+<td>表锁, 行锁</td>
+<td>表锁</td>
+</tr>
+<tr>
+<td>唯一索引</td>
+<td>必须有(没设置, 自己制造隐藏列充当主键)</td>
+<td>可无</td>
+</tr>
+<tr>
+<td>存储文件</td>
+<td></td>
+<td>frm是表定义文件，myd是数据文件，myi是索引文件</td>
+</tr>
+<tr>
+<td>CRUD操作</td>
+<td>执行大量的INSERT或UPDATE</td>
+<td>执行大量的SELECT，MyISAM是更好的选择</td>
+</tr>
+<tr>
+<td>是否支持数据库异常崩溃后的安全恢复</td>
+<td>支持</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/easydb/p/14890522.html">mysqldump 使用规范</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/w_xiao_wang/article/details/106589602">Linux下启动MySQL失败的原因</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zqin0/article/details/106444580/">启动mysql服务时一直提示ERROR The server quit without updating PID file</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Rampant/p/16884082.html">linux下安装MySQL8.0</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 monk6658@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    学如逆水行舟，不进则退
+</p>
+<!--<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>-->
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

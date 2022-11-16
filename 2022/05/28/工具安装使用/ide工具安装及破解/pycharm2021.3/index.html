@@ -2,36 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>小明的博客</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="小明的博客">
+  <title>pycharm 安装及破解 | 小明的博客</title>
+  <meta name="keywords" content=" pycharm , FinalAgent ">
+  <meta name="description" content="pycharm 安装及破解 | 小明的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta name="description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nodeJs安装及周边安装">
-<meta property="og:url" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="JMH使用指南">
+<meta property="og:url" content="https://monk6658.github.io/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="小明的博客">
-<meta property="og:description" content="详细讲解nodeJs环境安装，及相关管理工具等等。">
+<meta property="og:description" content="Java 代码性能测试的工具，JMH只适合细粒度的方法测试，并不适用于系统之间的链路测试.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122112939663.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113240013.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122102114982.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122113810731.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122114944012.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122115350566.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122131003183.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135729073.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122135936555.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122140022885.png">
-<meta property="og:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122172338440.png">
-<meta property="article:published_time" content="2021-11-05T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-23T01:22:12.698Z">
+<meta property="article:published_time" content="2022-09-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-14T09:30:46.624Z">
 <meta property="article:author" content="小明同鞋">
-<meta property="article:tag" content="hexo">
-<meta property="article:tag" content="nodeJs">
+<meta property="article:tag" content="基准测试工具">
+<meta property="article:tag" content="JMH">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://monk6658.github.io/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/image-20211122101100719.png">
 
 
 <link rel="icon" href="/img/head.jpg">
@@ -71,7 +58,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/head.jpg" />
@@ -118,11 +105,11 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(23)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(27)</small></div></li>
     
         
             
-            <li><div data-rel="工具">工具<small>(5)</small></div>
+            <li><div data-rel="工具">工具<small>(7)</small></div>
                 
             </li>
             
@@ -178,7 +165,7 @@
     
         
             
-            <li><div data-rel="JAVA">JAVA<small>(7)</small></div>
+            <li><div data-rel="JAVA">JAVA<small>(8)</small></div>
                 
             </li>
             
@@ -202,6 +189,14 @@
     
         
             
+            <li><div data-rel="mysql">mysql<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
             <li><div data-rel="oracle">oracle<small>(2)</small></div>
                 
             </li>
@@ -218,7 +213,7 @@
     </div>
     <div><a  class="friends">Friends</a></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="23">
+<input type="hidden" id="yelog_site_posts_number" value="27">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -277,15 +272,15 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>动态规划</a>
-            </li>
-        
-            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>分包粘包</a>
             </li>
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>函数</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>基准测试工具</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -302,6 +297,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>死锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -369,6 +368,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>FinalAgent</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>frp</a>
             </li>
         
@@ -389,6 +392,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>JMH</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>JNA</a>
             </li>
         
@@ -401,7 +408,19 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mongodb</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>nodeJs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nosql</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -410,6 +429,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>pfx</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>pycharm</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -443,6 +466,46 @@
     
     <nav id="title-list-nav">
         
+        <a  class="All JAVA "
+           href="/2022/09/13/java%E5%AD%A6%E4%B9%A0/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E2%80%94JMH%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"
+           data-tag="基准测试工具,JMH"
+           data-author="" >
+            <span class="post-title" title="JMH使用指南">JMH使用指南</span>
+            <span class="post-date" title="2022-09-13 00:00:00">2022/09/13</span>
+        </a>
+        
+        <a  class="All mysql "
+           href="/2022/06/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/mysql/mysql%E8%AF%A6%E8%A7%A3/"
+           data-tag="sql,mysql,函数"
+           data-author="" >
+            <span class="post-title" title="mysql操作">mysql操作</span>
+            <span class="post-date" title="2022-06-10 00:00:00">2022/06/10</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2022/05/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/ide%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/pycharm2021.3/"
+           data-tag="pycharm,FinalAgent"
+           data-author="" >
+            <span class="post-title" title="pycharm 安装及破解">pycharm 安装及破解</span>
+            <span class="post-date" title="2022-05-28 14:16:33">2022/05/28</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2022/03/24/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
+           data-tag="算法,java"
+           data-author="" >
+            <span class="post-title" title="算法学习">算法学习</span>
+            <span class="post-date" title="2022-03-24 14:16:33">2022/03/24</span>
+        </a>
+        
+        <a  class="All 工具 "
+           href="/2021/11/24/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/mongodb/mongodb%E5%AE%89%E8%A3%85%E5%8F%8A%E5%AD%A6%E4%B9%A0/"
+           data-tag="mongodb,nosql"
+           data-author="" >
+            <span class="post-title" title="mongodb安装及学习">mongodb安装及学习</span>
+            <span class="post-date" title="2021-11-24 00:00:00">2021/11/24</span>
+        </a>
+        
         <a  class="All 工具 "
            href="/2021/11/06/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/nodeJs%E4%BD%BF%E7%94%A8/nodeJs%E5%AE%89%E8%A3%85%E5%8F%8A%E5%91%A8%E8%BE%B9%E5%AE%89%E8%A3%85/"
            data-tag="hexo,nodeJs"
@@ -453,7 +516,7 @@
         
         <a  class="All JAVA "
            href="/2021/06/17/java%E5%AD%A6%E4%B9%A0/jvm/NullPointerException%20%E6%B2%A1%E6%9C%89%E6%89%93%E5%8D%B0%E5%BC%82%E5%B8%B8%E6%A0%88%E9%97%AE%E9%A2%98%E8%BF%BD%E8%B8%AA/"
-           data-tag="异常,JVM"
+           data-tag="JVM,异常"
            data-author="" >
             <span class="post-title" title="NullPointerException 没有打印异常栈问题追踪">NullPointerException 没有打印异常栈问题追踪</span>
             <span class="post-date" title="2021-06-17 14:16:33">2021/06/17</span>
@@ -507,14 +570,6 @@
             <span class="post-date" title="2021-04-19 00:00:00">2021/04/19</span>
         </a>
         
-        <a  class="All 算法 "
-           href="/2021/04/14/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
-           data-tag="动态规划,java"
-           data-author="" >
-            <span class="post-title" title="动态规划">动态规划</span>
-            <span class="post-date" title="2021-04-14 14:16:33">2021/04/14</span>
-        </a>
-        
         <a  class="All JAVA "
            href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/JNA/%E4%BD%BF%E7%94%A8c%E3%80%81c++%E6%96%B9%E6%B3%95/"
            data-tag="java调用c++方法,JNA"
@@ -525,7 +580,7 @@
         
         <a  class="All JVM "
            href="/2021/04/09/java%E5%AD%A6%E4%B9%A0/jvm/JvisualVm%E6%8F%90%E7%A4%BA%E6%97%A0%E6%B3%95%E7%9B%91%E8%A7%86%E6%9C%AC%E5%9C%B0Java%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/"
-           data-tag="JVM,JvisualVm"
+           data-tag="JvisualVm,JVM"
            data-author="" >
             <span class="post-title" title="JvisualVm提示无法监视本地Java应用程序解决办法">JvisualVm提示无法监视本地Java应用程序解决办法</span>
             <span class="post-date" title="2021-04-09 14:16:33">2021/04/09</span>
@@ -557,7 +612,7 @@
         
         <a  class="All oracle "
            href="/2020/12/17/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C/oracle/oracle%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"
-           data-tag="sql,oracle,函数"
+           data-tag="sql,函数,oracle"
            data-author="" >
             <span class="post-title" title="oracle基础语法">oracle基础语法</span>
             <span class="post-date" title="2020-12-17 00:00:00">2020/12/17</span>
@@ -642,12 +697,60 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-工具安装使用/ide工具安装及破解/pycharm2021.3" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B"><span class="toc-text">个人简介</span></a></li></ol>
+        <h1 class="article-title">pycharm 安装及破解</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="工具">工具</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">pycharm</a>
+            
+            <a class="color1">FinalAgent</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2022-05-23 10:36:54'>2022-05-28 14:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#pycharm"><span class="toc-text">pycharm</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%B5%84%E6%BA%90%E8%B7%AF%E5%BE%84"><span class="toc-text">1. 资源路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E7%A0%B4%E8%A7%A3"><span class="toc-text">2. 破解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -660,15 +763,43 @@
     }
 </style>
 </div>
-            <h1 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h1><p>一个永远在路上行走的人，即使无人陪同，也会一直走下去。<br>如果有一天失去了前进的勇气，请向我开枪。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pycharm"><a href="#pycharm" class="headerlink" title="pycharm"></a>pycharm</h1><h2 id="1-资源路径"><a href="#1-资源路径" class="headerlink" title="1. 资源路径"></a>1. 资源路径</h2><p><a href="pycharm.zip">pycharm.zip</a> </p>
+<p>解压安装以上pycharm，并把**<code>FinalAgent</code>** 补丁包放置 文件主目录下，下面以 <code>D:\software\pycharm</code> 当前目录为例</p>
+<h2 id="2-破解"><a href="#2-破解" class="headerlink" title="2. 破解"></a>2. 破解</h2><p>2.1 修改配置文件</p>
+<p><img src="/2022/05/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/ide%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/pycharm2021.3/image-20220523103049147.png" alt="image-20220523103049147"></p>
+<p>2.2 在配置文件最后一行加入 <code>-javaagent:D:\software\pycharm\FinalAgent-1.1.5.jar</code> 指向工具包</p>
+<p><img src="/2022/05/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/ide%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/pycharm2021.3/image-20220523103253941.png" alt="image-20220523103253941"></p>
+<p>2.3 重启</p>
+<p>2.4 激活，填写注册码激活（文件中自带）。 如若失效，参考里有官网地址，生成对应的激活码即可</p>
+<p><img src="/2022/05/28/%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/ide%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/pycharm2021.3/image-20220523103504339.png" alt="image-20220523103504339"></p>
+<pre><code class="vm">IAMABADGUY-eyJhc3NpZ25lZUVtYWlsIjoiIiwiYXNzaWduZWVOYW1lIjoiIiwiYXV0b1Byb2xvbmdhdGVkIjpmYWxzZSwiY2hlY2tDb25jdXJyZW50VXNlIjpmYWxzZSwiZ3JhY2VQZXJpb2REYXlzIjozMCwiaGFzaCI6IlJFVEFJTDotODU4NDk1Mjc3IiwiaXNBdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJsaWNlbnNlSWQiOiJJQU1BQkFER1VZIiwibGljZW5zZVJlc3RyaWN0aW9uIjoiIiwibGljZW5zZWVOYW1lIjoiQmFkR3V5IiwibWV0YWRhdGEiOiIzODY3MTk3NDQzQUJBRDY3OTIxMCIsInByb2R1Y3RzIjpbeyJjb2RlIjoiUEMiLCJleHRlbmRlZCI6ZmFsc2UsImZhbGxiYWNrRGF0ZSI6IjIwNzctMTItMzEiLCJwYWlkVXBUbyI6IjIwNzctMTItMzEifSx7ImNvZGUiOiJQUEMiLCJleHRlbmRlZCI6dHJ1ZSwiZmFsbGJhY2tEYXRlIjoiMjA3Ny0xMi0zMSIsInBhaWRVcFRvIjoiMjA3Ny0xMi0zMSJ9LHsiY29kZSI6IlBXUyIsImV4dGVuZGVkIjp0cnVlLCJmYWxsYmFja0RhdGUiOiIyMDc3LTEyLTMxIiwicGFpZFVwVG8iOiIyMDc3LTEyLTMxIn0seyJjb2RlIjoiUFNJIiwiZXh0ZW5kZWQiOnRydWUsImZhbGxiYWNrRGF0ZSI6IjIwNzctMTItMzEiLCJwYWlkVXBUbyI6IjIwNzctMTItMzEifSx7ImNvZGUiOiJQQ1dNUCIsImV4dGVuZGVkIjp0cnVlLCJmYWxsYmFja0RhdGUiOiIyMDc3LTEyLTMxIiwicGFpZFVwVG8iOiIyMDc3LTEyLTMxIn1dfQ==-cN0mb6wQhbri898mnXeLqcMBSDu9xsZPUQXbxdIAocVIrEYxlBq3xSZQ5ysGPYhUxo7PFVo90zwRYGeccIveKHLolAcREbOHtvjVI1oSqI0WUzy5sJttSr1hO676wvYBwhHUJ+dAlqaERYSIS5eOiXe5i3AXz4iw+uovnNc+lbYkv/zm0+Zp08vYLxfNmBFzx76QImiNyyevVGHOydHFg3U7PMLpY5bd8dtgbqScr5yIOk7Q1r0bAWvMSAiG13qRWc/hkIGuv9NzJJFzBmFHujGeVFKDI19ZYhwzSzqvprmFN1Mgqz3CXuoMOY9PvP6evCZ9IP0kNIc1n9fQ5L2zhhrFoJnQuoXn7/gxjQFPz6kct9zFj+/6gb4Nj9Ul5qcVmP5wwUh/4F+K4Ha7Pc6Uu2QOOg4Hwr4LbLN2GsQi3dXU5lAoYvH9EUzzvEjEX9UT4KNuGZaK0jDosaDtt4qglPglG/pOe7fRPnIs7LBoHrLVl9Wf4vfGEvPwA+gMRh5lormZeCsBjFGuFHZa31a66f5b1HBzD+b7HhLNzNPKnhRr449q+Vu4KAD/ck3gUiRTE9OcQSaormWLy0G7DaIsZTXCvAwSpz/aalhIdToaGngh+Gcgk6nPgyP/agH/9Ty09gD7uKbN7U5FT9114C4jPtHSzLm8Qvln+PsWpl82W/o=-MIIE+TCCAuGgAwIBAgIUDSpWXB/oC31ZRfeHBTUvx6cHnQMwDQYJKoZIhvcNAQELBQAwGDEWMBQGA1UEAwwNSmV0UHJvZmlsZSBDQTAgFw0wMDAxMDEwNDAwMDBaGA8yMDk5MTIzMTA0MDAwMFowGDEWMBQGA1UEAwwNSmV0UHJvZmlsZSBDQTCCAiIwDQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAIse44WlT9nJYw3p52xhm0yHJYlfR66yR0DBjECufKY1TeVECPqY1UULwomqtcdFEPBuN5e7CpmNhRC3WYvUuZZkmKWMY43IAndO1W+zDGFY9iJdMUdOAo7iNw77X3Kq5T2q2/SP/vBNMpymemSKE3TA5/pditgsGc52JfUFkrNQesImQUzPH58GwsNgroSgzp8PSK3v8x1CuPe0W1IfVRXrHrm+5VbPvBKmeLSeiWirwk44FbomNVCqO8k5Sr4+6Mv8bpSEPbe5mtQ+OUdKh5ps7ShhZEzoW6wzu3iX4OAEoHyWSKIUkbYikZlpBk9rA1Kgubo4Q5dGjK0cMC8Ir8BcIkCP6gVYMdGvlSnB0m8/xJkkS7P/2+ZX4aYa/ae4rEEumIDtr0H4w4qb24Zflhr1+Zt6YOhl0e1KWiSTe3EJs3+BEXZaZV+Wn9SaJwb/zn03qo+cHfaDcYhiPAEvU0ufW2XT3UenfTGzKaXw1sLePG5aE20SIeIjUUL/QX/kBm7oD7VV3pb1uWxDOSPRjCnVXfwUNMJl7z4HYZHYINzFDiXBXksscWQMvQGXJWh3eJdMSse+xpYsouU+ENZmZF+jD9P73uvcxIbfcvB3gGc346DyWzRRYwlULhr2gTp7fSQhUWTWfgUfN9ASZR8OtePm6RZzcNrs28AQfRF634nXAgMBAAGjOTA3MAkGA1UdEwQCMAAwCwYDVR0PBAQDAgXgMB0GA1UdDgQWBBQCTeTJaVuEUCqwkHhlNsrTLQJzYjANBgkqhkiG9w0BAQsFAAOCAgEAVVqhzo1snq5Ug9F0Ia3VgMcaZ5X/9vmtsTCkS9e8QAEtJhgf5Xu6pqt+BFu7bxPN+q9UtGBM/zrfyR1K2eGfikGNjPqyp3B9tOKvMN69eWbmCzzAZAOZmHmADcjBEGTfcYwJbPMDKefsnGJyMTwf4/9x+nT9QbE7SFE9vlpQ509qZjtcPcGlHwkqam+4ddnjJNsV3Lr4Kx5B6Qdhd9IRD08AyKjBk7arsiJ5VKdo4TnCO0mwj9NfarE41CyE5Y9EE1+tCqsPSO2U2D/3/MGAeTVbB/qfFxHO56Tiw1q/yY8MyBBbQVVXN3ZdITFg92tLIa6DbMyJGTKr/6d9WwkVqQv0aCh1tNam1T2op9l2AtXbR3POrRZenbdO/687WxJmI43GwRgyIiqySzKNRCGaH64Miw/hpnaIHbJNsIZFexLLO4UwcJ4wdRhlQzML7w0SCAnKZk8GkCRuiIIoLu6Ubv6oxpDjNgistkvYfzkPu7l/hsc53oYYwyPmSHp1yUSXm/QxXrMWfCTwTzCUDwU6eCflLybagZMXtSMTzRs9apQW6RUwJOKJw4jcxHp1Nh+a4U3UhhBDtgzxzM4/rk4URwKgwFyohMQfhw1lVE1Wx5pJ/g+bVZRxH1wUDDRQ5a+PL5rYhvRDwwPhs1NAnaHEda2M/wS/TajsHs2hbIC1O1A=
+</code></pre>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://idea.badguys.club/">FinalAgent 补丁官网</a></p>
+<p><a target="_blank" rel="noopener" href="https://idea.badguys.club/help.html">FinalAgent(IDEA 激活插件)使用方法</a></p>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 monk6658@163.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -677,11 +808,11 @@
 <!--<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>-->
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
